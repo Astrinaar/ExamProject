@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package states;
 
-import GUI.StandardButton;
-import examproject.ExamProject;
-import helpers.ImageArchive;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -21,20 +17,17 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author PK
  */
-public class MainMenu extends BasicGameState {
+public class CombatState extends BasicGameState{
 
     private int id;
     private StateHandler stateHandler;
-    private Input input;
     private Image background;
-    private StandardButton buttonSinglePlayer;
-    
 
-    public MainMenu(int id, StateHandler stateHandler) {
+    public CombatState(int id, StateHandler stateHandler) {
         this.id = id;
         this.stateHandler = stateHandler;
     }
-
+            
     @Override
     public int getID() {
         return id;
@@ -42,31 +35,23 @@ public class MainMenu extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        background = new Image("res/MainMenuBG.JPG");
-        buttonSinglePlayer = new StandardButton(new Image("res/ButtonSinglePlayer.png"), 264, 400) {
-            @Override
-            public void Click() {
-                stateHandler.enterState(StateHandler.COMBATSTATE);
-                stateHandler.loadCombatState(ImageArchive.backgroundGrass);
-            }
-        };
+        
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         background.draw(0, 0);
-        buttonSinglePlayer.render(container, game, g);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-        input = container.getInput();
-        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
-            Point p = new Point(input.getMouseX(), input.getMouseY());
-            if(buttonSinglePlayer.getBounds().contains(p)){
-                buttonSinglePlayer.Click();
-            }
-        }
+       
     }
 
+    public void setBackground(Image background) {
+        this.background = background;
+    }
+    
+    
+    
 }

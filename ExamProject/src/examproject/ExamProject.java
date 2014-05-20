@@ -6,6 +6,7 @@
 
 package examproject;
 
+import helpers.ImageArchive;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -18,7 +19,9 @@ import states.*;
  */
 public class ExamProject extends StateBasedGame{
     
-    public static final int MAINMENUSTATE = 0;
+    private StateHandler stateHandler;
+    private ImageArchive imgArchive;
+    
 
     /**
      * @param args the command line arguments
@@ -32,12 +35,23 @@ public class ExamProject extends StateBasedGame{
     
     public ExamProject (String name){
         super(name);
+        imgArchive = new ImageArchive();
     }
 
     @Override
     public void initStatesList(GameContainer container) throws SlickException {
-        addState(new MainMenu(MAINMENUSTATE));
-        getState(MAINMENUSTATE).init(container, this);
-        enterState(MAINMENUSTATE);
+        initHelpers(container, this);
+        stateHandler = new StateHandler(this);
+        stateHandler.init(container, this);
+        addState(new MainMenu(StateHandler.MAINMENUSTATE, stateHandler));
+        getState(StateHandler.MAINMENUSTATE).init(container, this);
+        addState(new CombatState(StateHandler.COMBATSTATE, stateHandler));
+        getState(StateHandler.COMBATSTATE).init(container, this);
+        stateHandler.setCombatState((CombatState)getState(StateHandler.COMBATSTATE));        
+        enterState(StateHandler.MAINMENUSTATE);
+    }
+    
+    public void initHelpers(GameContainer container, StateBasedGame game) throws SlickException {
+        imgArchive.init(container, game);
     }
 }
