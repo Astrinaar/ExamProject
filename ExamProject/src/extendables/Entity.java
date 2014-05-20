@@ -18,26 +18,32 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class Entity implements SlickClass {
 
-    float xPos;
-    float yPos;
-    Image texture;
-    Rectangle bounds;
-    float life;
-    float maxLife;
-    float speed;
-    Rectangle pathing;
-    float pathingX;
-    float pathingY;
+    public float xPos;
+    public float yPos;
+    public Image texture;
+    public Rectangle bounds;
+    public float life;
+    public float maxLife;
+    public float speed;
+    public Rectangle pathing;
+    public float pathingX;
+    public float pathingY;
 
     
+    public Entity(float xPos, float yPos) {
+        this.xPos = xPos;
+        this.yPos = yPos;
 
+    }
+    
+    
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         texture.draw(xPos, yPos);
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         enforceBorders(container);
         updateBounds();
         pathing.setLocation(xPos + pathingX, yPos + pathingY);
