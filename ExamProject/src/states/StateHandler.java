@@ -20,7 +20,6 @@ public class StateHandler {
 
     private final ExamProject examProject;
     public static final int MAINMENUSTATE = 0;
-    private CombatState combatState;
     private CombatStateLoader combatStateLoader;
     public static final int COMBATSTATE = 1;
 
@@ -40,8 +39,7 @@ public class StateHandler {
         combatStateLoader.loadCombatState(level);
     }
 
-    public void setCombatState(CombatState combatState, CombatStateLoader combatStateLoader) {
-        this.combatState = combatState;
+    public void setCombatStateLoader(CombatStateLoader combatStateLoader) {
         this.combatStateLoader = combatStateLoader;
     }
 

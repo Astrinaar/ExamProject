@@ -31,11 +31,16 @@ public class Player extends Entity {
     private float slowAmount = 0;
     private PlayerHandler playerHandler;
 
+    private boolean isCasting = false;
+    private float castingLockCount = 0;
+    private float castingTime = 0;
+    private float castingTimeMax;
+    private int castID;
+
     public Player(float xPos, float yPos, PlayerHandler playerHandler) {
         super(xPos, yPos);
         this.playerHandler = playerHandler;
     }
-    
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -61,6 +66,17 @@ public class Player extends Entity {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
+        input = container.getInput();
+        if (castingLockCount > 0) {
+            castingLockCount -= 0.1041667f * delta;
+        }
+        if (isCasting){
+            castingTime -= 0.1041667f * delta;
+            if(castingTime <= 0){
+                cast();
+                isCasting = false;
+            }
+        }
         if (slowed) {
             slowDuration -= 0.5f * delta;
             if (slowDuration <= 0) {
@@ -76,26 +92,47 @@ public class Player extends Entity {
     }
 
     private void reactToInput(GameContainer container, int delta) {
-        input = container.getInput();
         if ((input.isKeyDown(Input.KEY_S) && input.isKeyDown(Input.KEY_D) || input.isKeyDown(Input.KEY_S) && input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_W) && input.isKeyDown(Input.KEY_D) || input.isKeyDown(Input.KEY_W) && input.isKeyDown(Input.KEY_A)) && (!(input.isKeyDown(Input.KEY_S) && input.isKeyDown(Input.KEY_W)) && (!(input.isKeyDown(Input.KEY_A) && input.isKeyDown(Input.KEY_D))))) {
             speed = doubleDirectionMultiplier * originalSpeed * (1 - slowAmount);
         } else {
             speed = originalSpeed * (1 - slowAmount);
         }
-        if (input.isKeyDown(Input.KEY_S)) {
+        if (input.isKeyDown(Input.KEY_S) && castingLockCount <= 0) {
             yPos += speed * delta;
+            isCasting = false;
         }
-        if (input.isKeyDown(Input.KEY_W)) {
+        if (input.isKeyDown(Input.KEY_W) && castingLockCount <= 0) {
             yPos -= speed * delta;
+            isCasting = false;
         }
-        if (input.isKeyDown(Input.KEY_D)) {
+        if (input.isKeyDown(Input.KEY_D) && castingLockCount <= 0) {
             xPos += speed * delta;
+            isCasting = false;
         }
-        if (input.isKeyDown(Input.KEY_A)) {
+        if (input.isKeyDown(Input.KEY_A) && castingLockCount <= 0) {
             xPos -= speed * delta;
+            isCasting = false;
+        }
+        if (input.isKeyDown(Input.KEY_1) && !isCasting) {
+            useSkill(0);
+        }
+    }
+
+    public void useSkill(int id) {
+        switch (id) {
+            case 0:
+                isCasting = true;
+                castingLockCount = 50;
+                castingTime = 100;
+                castingTimeMax = 100;
+                castID = 0;
         }
     }
     
+    public void cast(){
+        playerHandler.SpawnProjectile(castID);
+    }
+
     @Override
     public void updateBounds() {
         bounds.setLocation(xPos + 3, yPos + 3);
@@ -115,5 +152,22 @@ public class Player extends Entity {
         slowAmount = 0;
         slowed = false;
         slowDuration = 0;
+        isCasting = false;
+        castingLockCount = 0;
+        castingTime = 0;
     }
+    
+    public boolean isCasting(){
+        return isCasting;
+    }
+
+    public float getCastingTime() {
+        return castingTime;
+    }
+
+    public float getCastingTimeMax() {
+        return castingTimeMax;
+    }
+    
+    
 }

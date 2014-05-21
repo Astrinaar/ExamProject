@@ -23,24 +23,24 @@ public class MathTool {
         MathTool.player = player;
     }
     
-    public static float getAngle(Input input, float projectileid) {
-        float deltax = input.getMouseX() - projectileid - (player.getxPos());
-        float deltay = input.getMouseY() - projectileid - (player.getyPos());
+    public static float getAngle(Input input, float projectileXOffset) {
+        float deltax = input.getMouseX() - projectileXOffset - (player.getxPos());
+        float deltay = input.getMouseY() - projectileXOffset - (player.getyPos());
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
     
     public static float getDistanceToPlayer(float xPos, float yPos) {
-        float deltax = xPos - (player.getxPos() + player.texture.getWidth()/2);
-        float deltay = yPos - (player.getyPos() + player.texture.getHeight()/2);
+        float deltax = xPos - (player.getxPos() + player.getTexture().getWidth()/2);
+        float deltay = yPos - (player.getyPos() + player.getTexture().getHeight()/2);
         float distance = deltax*deltax + deltay*deltay;
         distance = (float) Math.sqrt(distance);
         return distance;
     }
     
     public static float getDistanceBetweenEntities(Entity e1, Entity e2) {
-        float deltax = e1.getxPos() + e1.texture.getWidth()/2 - (e2.getxPos() + e2.texture.getWidth()/2);
-        float deltay = e1.getyPos() + e1.texture.getHeight()/2 - (e2.getyPos() + e2.texture.getHeight()/2);
+        float deltax = e1.getxPos() + e1.getTexture().getWidth()/2 - (e2.getxPos() + e2.getTexture().getWidth()/2);
+        float deltay = e1.getyPos() + e1.getTexture().getHeight()/2 - (e2.getyPos() + e2.getTexture().getHeight()/2);
         float distance = deltax*deltax + deltay*deltay;
         distance = (float) Math.sqrt(distance);
         return distance;
@@ -55,37 +55,37 @@ public class MathTool {
         return distance;
     }
     
-    public static float getAngleInvY(Input input, float projectileid) {
-        float deltax = input.getMouseX() - projectileid - (player.getxPos());
-        float deltay = -input.getMouseY() - projectileid + (player.getyPos());
+    public static float getAngleInvY(Input input, float projectileXOffset) {
+        float deltax = input.getMouseX() - projectileXOffset - (player.getxPos());
+        float deltay = -input.getMouseY() - projectileXOffset + (player.getyPos());
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
     
-    public static float getAngleInvX(Input input, float projectileid) {
-        float deltax = -input.getMouseX() + projectileid + (player.getxPos());
-        float deltay = input.getMouseY() + projectileid - (player.getyPos());
+    public static float getAngleInvX(Input input, float projectileXOffset) {
+        float deltax = -input.getMouseX() + projectileXOffset + (player.getxPos());
+        float deltay = input.getMouseY() + projectileXOffset - (player.getyPos());
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
     
     public static float getAngleToPlayer(float xPos, float yPos){
-        float deltax = (player.getxPos() + player.texture.getWidth()/2) - xPos;
-        float deltay = (player.getyPos() + player.texture.getHeight()/2) - yPos;
+        float deltax = (player.getxPos() + player.getTexture().getWidth()/2) - xPos;
+        float deltay = (player.getyPos() + player.getTexture().getHeight()/2) - yPos;
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
     
     public static float getAngleToPlayerInvY(float xPos, float yPos){
-        float deltax = (player.getxPos() + player.texture.getWidth()/2) - xPos;
-        float deltay = (-player.getyPos() + player.texture.getHeight()/2) + yPos;
+        float deltax = (player.getxPos() + player.getTexture().getWidth()/2) - xPos;
+        float deltay = (-player.getyPos() + player.getTexture().getHeight()/2) + yPos;
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
     
     public static float getAngleToPlayerInvX(float xPos, float yPos){
-        float deltax = (player.getxPos() + player.texture.getWidth()/2) + xPos;
-        float deltay = (player.getyPos() + player.texture.getHeight()/2) - yPos;
+        float deltax = (player.getxPos() + player.getTexture().getWidth()/2) + xPos;
+        float deltay = (player.getyPos() + player.getTexture().getHeight()/2) - yPos;
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }

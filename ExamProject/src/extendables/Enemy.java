@@ -11,8 +11,8 @@ package extendables;
  */
 public abstract class Enemy extends Entity {
 
-    public MoveStrategy moveStrat;
-    public String currentMoveStrat;
+    protected MoveStrategy moveStrat;
+    protected String currentMoveStrat;
 
     public Enemy(float xPos, float yPos) {
         super(xPos, yPos);

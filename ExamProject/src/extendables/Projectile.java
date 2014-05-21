@@ -19,21 +19,20 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class Projectile {
 
-    float xPos;
-    float yPos;
-    Image texture;
-    float speed;
-    float angle;
-    float lifeTime = 1;
-    Rectangle bounds;
-    float damage;
+    protected float xPos;
+    protected float yPos;
+    protected Image texture;
+    protected float speed;
+    protected float angle;
+    protected float lifeTime = 1;
+    protected Rectangle bounds;
+    protected float damage;
 
-    public Projectile(float xPos, float yPos, float angle, Image texture) {
+    public Projectile(float xPos, float yPos, float angle) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.angle = angle;
-        this.texture = texture;
-        bounds = new Rectangle(xPos, yPos, texture.getWidth(), texture.getHeight());
+        
     }
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) {

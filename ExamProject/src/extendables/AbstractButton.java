@@ -19,10 +19,10 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class AbstractButton implements SlickClass{
 
-    private Image texture;
-    private Rectangle bounds;
-    private float xPos;
-    private float yPos;
+    protected Image texture;
+    protected Rectangle bounds;
+    protected float xPos;
+    protected float yPos;
     
     public AbstractButton(Image texture, float xPos, float yPos){
         this.texture = texture;

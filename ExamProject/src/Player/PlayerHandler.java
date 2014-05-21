@@ -26,7 +26,7 @@ public class PlayerHandler {
     private Image leenFace;
     private boolean dead = false;
     private PlayerProjectileManager projectileManager;
-    
+
     public PlayerHandler(ArrayList<Enemy> enemies) {
         player = new Player(387, 500, this);
         projectileManager = new PlayerProjectileManager(enemies);
@@ -42,8 +42,11 @@ public class PlayerHandler {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         player.render(container, game, g);
         projectileManager.render(container, game, g);
-        drawHealthBars(g);
+        drawHealthBar(g);
         drawLeenFace(g);
+        if (player.isCasting()) {
+            drawCastBar(g);
+        }
     }
 
     public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -54,23 +57,36 @@ public class PlayerHandler {
         projectileManager.update(container, game, delta);
     }
 
-    public void drawHealthBars(Graphics g) {
+    public void SpawnProjectile(int id) {
+        projectileManager.SpawnProjectile(player.getxPos(), player.getyPos(), id);
+    }
+
+    public void drawHealthBar(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(200, 550, 400, 30);
+        g.fillRect(75, 17, 100, 20);
         if (player.getLife() > 0) {
             g.setColor(Color.red);
-            g.fillRect(201, 551, (398) * (player.getLife() / player.getMaxLife()), 28);
+            g.fillRect(76, 18, (98) * (player.getLife() / player.getMaxLife()), 18);
         }
         g.setColor(Color.white);
         if (player.getLife() > 0) {
-            g.drawString((int) player.getLife() + " / " + (int) player.getMaxLife(), 370, 555);
+            g.drawString((int) player.getLife() + " / " + (int) player.getMaxLife(), 85, 18);
         } else {
-            g.drawString(0 + " / " + (int) player.getMaxLife(), 370, 555);
+            g.drawString(0 + " / " + (int) player.getMaxLife(), 85, 18);
         }
     }
 
+    public void drawCastBar(Graphics g) {
+        g.setColor(Color.black);
+        g.fillRect(75, 43, 100, 20);
+        g.setColor(Color.blue);
+        g.fillRect(76, 44, (98) * (player.getCastingTime() / player.getCastingTimeMax()), 18);
+//        g.setColor(Color.white);
+//        g.drawString("" + player.getCastingTime(), 85, 66);
+    }
+
     public void drawLeenFace(Graphics g) {
-        leenFace.draw(110, 527);
+        leenFace.draw(5, 5);
     }
 
     public static Player getPlayer() {
@@ -87,5 +103,7 @@ public class PlayerHandler {
 
     public void reset() {
         dead = false;
+        player.reset();
+        projectileManager.reset();
     }
 }

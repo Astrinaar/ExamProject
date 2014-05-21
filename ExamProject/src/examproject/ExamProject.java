@@ -31,6 +31,9 @@ public class ExamProject extends StateBasedGame {
         // TODO code application logic here
         AppGameContainer app = new AppGameContainer(new ExamProject("Namae"));
         app.setDisplayMode(800, 600, false);
+        app.setShowFPS(false);
+        app.setTargetFrameRate(59);
+        app.setSmoothDeltas(true);
         app.start();
     }
 
@@ -51,7 +54,7 @@ public class ExamProject extends StateBasedGame {
         getState(StateHandler.COMBATSTATE).init(container, this);
         combatStateLoader = new CombatStateLoader(combatState);
         combatStateLoader.init(container, this);
-        stateHandler.setCombatState(combatState, combatStateLoader);
+        stateHandler.setCombatStateLoader(combatStateLoader);
         enterState(StateHandler.MAINMENUSTATE);
     }
 

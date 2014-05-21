@@ -18,16 +18,16 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class Entity implements SlickClass {
 
-    public float xPos;
-    public float yPos;
-    public Image texture;
-    public Rectangle bounds;
-    public float life;
-    public float maxLife;
-    public float speed;
-    public Rectangle pathing;
-    public float pathingX;
-    public float pathingY;
+    protected float xPos;
+    protected float yPos;
+    protected Image texture;
+    protected Rectangle bounds;
+    protected float life;
+    protected float maxLife;
+    protected float speed;
+    protected Rectangle pathing;
+    protected float pathingX;
+    protected float pathingY;
 
     
     public Entity(float xPos, float yPos) {

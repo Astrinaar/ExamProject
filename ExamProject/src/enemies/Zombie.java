@@ -71,7 +71,6 @@ public class Zombie extends Enemy {
         }
         if(!(MathTool.getDistanceToPlayer(xPos + texture.getWidth() / 2, yPos + texture.getHeight() / 2) < 25)) {
         moveStrat.move(this, delta);
-            System.out.println("move");
         }
     }
 

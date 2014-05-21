@@ -40,6 +40,7 @@ public class EnemyManager implements SlickClass{
     }
 
 
+    @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) {
         Collections.sort(enemies, comparatorY);
         enemyiterator = enemies.iterator();
@@ -51,6 +52,7 @@ public class EnemyManager implements SlickClass{
         }
     }
 
+    @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
         enemyiterator = enemies.iterator();
         while (enemyiterator.hasNext()) {
@@ -78,12 +80,23 @@ public class EnemyManager implements SlickClass{
     
     
 
-    public void reset(ArrayList<Enemy> enemies){
-        setEnemies(enemies);
+    public void reset(){
+       enemyiterator = enemies.iterator();
+        while (enemyiterator.hasNext()) {
+            enemyiterator.next();
+            enemyiterator.remove();
+        }
     }
     
     public void setEnemies(ArrayList<Enemy> enemies) {
-        this.enemies = enemies;
+        enemyiterator = this.enemies.iterator();
+        while (enemyiterator.hasNext()) {
+            enemyiterator.next();
+            enemyiterator.remove();
+        }
+        for(Enemy e : enemies){
+            this.enemies.add(e);
+        }
     }
 
     

@@ -9,13 +9,17 @@ import extendables.Enemy;
 import extendables.Entity;
 import extendables.Projectile;
 import extendables.SlickClass;
+import helpers.ImageArchive;
+import helpers.MathTool;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import projectiles.WeakFireball;
 
 /**
  *
@@ -25,8 +29,11 @@ public class PlayerProjectileManager implements SlickClass {
 
     private ArrayList<Projectile> projectiles;
     private ArrayList<Enemy> enemies;
-    private Iterator<Projectile> playeriterator;
+    private Iterator<Projectile> projectileiterator;
     private Iterator<Enemy> enemyiterator;
+    private Input input;
+
+    private float weakFireballXOffset;
 
     public PlayerProjectileManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
@@ -35,34 +42,38 @@ public class PlayerProjectileManager implements SlickClass {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-
+        weakFireballXOffset = ImageArchive.getWeakFireball().getWidth() / 2;
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) {
-        playeriterator = projectiles.iterator();
-        while (playeriterator.hasNext()) {
-            Projectile p = playeriterator.next();
+        projectileiterator = projectiles.iterator();
+        while (projectileiterator.hasNext()) {
+            Projectile p = projectileiterator.next();
             p.render(container, game, g);
         }
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
-        playeriterator = projectiles.iterator();
-        while (playeriterator.hasNext()) {
-            Projectile p = playeriterator.next();
+        input = container.getInput();
+        projectileiterator = projectiles.iterator();
+        while (projectileiterator.hasNext()) {
+            Projectile p = projectileiterator.next();
             p.update(container, game, delta);
             checkCollision(p);
             if (p.getYPos() < -100 || p.getYPos() > container.getHeight() + 100 || p.getXPos() < -100 || p.getXPos() > container.getWidth() + 100 || p.getLifeTime() <= 0) {
-                playeriterator.remove();
+                projectileiterator.remove();
             }
         }
     }
 
-    public void SpawnProjectile(float xPos, float yPos, float angle, int id) {
+    public void SpawnProjectile(float xPos, float yPos, int id) {
+
         switch (id) {
             case 0:
+                float angle = MathTool.getAngle(input, weakFireballXOffset);
+                projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
                 break;
         }
     }
@@ -77,9 +88,12 @@ public class PlayerProjectileManager implements SlickClass {
         }
     }
 
-    public void reset(ArrayList<Enemy> enemies) {
-        this.enemies = enemies;
-        projectiles = new ArrayList<>();
+    public void reset() {
+        projectileiterator = projectiles.iterator();
+        while (projectileiterator.hasNext()) {
+            projectileiterator.next();
+            projectileiterator.remove();
+        }
     }
 
 }

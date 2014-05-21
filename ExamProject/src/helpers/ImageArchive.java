@@ -5,6 +5,8 @@
  */
 package helpers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -31,6 +33,9 @@ public class ImageArchive {
     //Enemies
     private static Image zombie;
     private static Image bigZombie;
+    
+    //Projectiles
+    private static Image weakFireball;
 
     public ImageArchive() {
 
@@ -88,6 +93,16 @@ public class ImageArchive {
 
     public static Image getBigZombie() {
         return bigZombie;
+    }
+    
+    //Projectiles
+    public static Image getWeakFireball() {
+        try {
+            return new Image("res/WeakFireball.png");
+        } catch (SlickException ex) {
+            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }
