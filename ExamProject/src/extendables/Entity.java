@@ -66,6 +66,10 @@ public abstract class Entity implements SlickClass {
 
         }
     }
+    
+    public void receiveDamage(float damage){
+        setLife(life - damage);
+    }
 
     public float getLife() {
         return life;

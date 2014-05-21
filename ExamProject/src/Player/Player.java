@@ -41,7 +41,7 @@ public class Player extends Entity {
         slowedTint = new Image("res/PlayerSlowed.png");
         super.bounds = new Rectangle(xPos + 3, yPos + 3, texture.getWidth() - 6, texture.getHeight() - 6);
         slowedTint.setAlpha(0.5f);
-        super.speed = 0.1f;
+        super.speed = 0.13f;
         super.pathingX = 2;
         super.pathingY = 10;
         super.pathing = new Rectangle(xPos + pathingX, yPos + pathingY, 8, 10);

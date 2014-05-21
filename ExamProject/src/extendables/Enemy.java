@@ -15,6 +15,10 @@ public abstract class Enemy extends Entity {
     String currentMoveStrat;
     float baseScore;
 
+    public Enemy(float xPos, float yPos) {
+        super(xPos, yPos);
+    }
+
     public void act(int delta) {
 
     }

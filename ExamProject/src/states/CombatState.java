@@ -7,6 +7,7 @@
 package states;
 
 import Player.Player;
+import Player.PlayerHandler;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -23,7 +24,7 @@ public class CombatState extends BasicGameState{
     private int id;
     private StateHandler stateHandler;
     private Image background;
-    private Player player;
+    private PlayerHandler playerHandler;
 
     public CombatState(int id, StateHandler stateHandler) {
         this.id = id;
@@ -37,19 +38,19 @@ public class CombatState extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        player = new Player(387, 500);
-        player.init(container, game);
+        playerHandler = new PlayerHandler();
+        playerHandler.init(container, game);
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         background.draw(0, 0);
-        player.render(container, game, g);
+        playerHandler.render(container, game, g);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-       player.update(container, game, delta);
+       playerHandler.update(container, game, delta);
     }
 
     public void setBackground(Image background) {

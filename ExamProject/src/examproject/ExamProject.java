@@ -6,7 +6,7 @@
 
 package examproject;
 
-import helpers.ImageArchive;
+import helpers.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -21,6 +21,7 @@ public class ExamProject extends StateBasedGame{
     
     private StateHandler stateHandler;
     private ImageArchive imgArchive;
+    private MathTool mathTool;
     
 
     /**
