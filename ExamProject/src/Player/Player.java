@@ -6,6 +6,7 @@
 package Player;
 
 import extendables.Entity;
+import helpers.ImageArchive;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,17 +29,18 @@ public class Player extends Entity {
     private boolean slowed = false;
     private float slowDuration;
     private float slowAmount = 0;
+    private PlayerHandler playerHandler;
 
-    public Player(float xPos, float yPos) {
+    public Player(float xPos, float yPos, PlayerHandler playerHandler) {
         super(xPos, yPos);
-
+        this.playerHandler = playerHandler;
     }
     
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        texture = new Image("res/Player.png");
-        slowedTint = new Image("res/PlayerSlowed.png");
+        texture = ImageArchive.getPlayer();
+        slowedTint = ImageArchive.getPlayerSlowedTint();
         super.bounds = new Rectangle(xPos + 3, yPos + 3, texture.getWidth() - 6, texture.getHeight() - 6);
         slowedTint.setAlpha(0.5f);
         super.speed = 0.13f;
@@ -50,7 +52,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         super.render(container, game, g);
         if (slowed) {
             slowedTint.draw(xPos, yPos);

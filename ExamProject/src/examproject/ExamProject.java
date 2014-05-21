@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package examproject;
 
 import helpers.*;
@@ -17,12 +16,13 @@ import states.*;
  *
  * @author PK
  */
-public class ExamProject extends StateBasedGame{
-    
+public class ExamProject extends StateBasedGame {
+
     private StateHandler stateHandler;
     private ImageArchive imgArchive;
     private MathTool mathTool;
-    
+    private CombatState combatState;
+    private CombatStateLoader combatStateLoader;
 
     /**
      * @param args the command line arguments
@@ -33,8 +33,8 @@ public class ExamProject extends StateBasedGame{
         app.setDisplayMode(800, 600, false);
         app.start();
     }
-    
-    public ExamProject (String name){
+
+    public ExamProject(String name) {
         super(name);
         imgArchive = new ImageArchive();
     }
@@ -44,14 +44,17 @@ public class ExamProject extends StateBasedGame{
         initHelpers(container, this);
         stateHandler = new StateHandler(this);
         stateHandler.init(container, this);
+        combatState = new CombatState(StateHandler.COMBATSTATE, stateHandler);
         addState(new MainMenu(StateHandler.MAINMENUSTATE, stateHandler));
         getState(StateHandler.MAINMENUSTATE).init(container, this);
-        addState(new CombatState(StateHandler.COMBATSTATE, stateHandler));
+        addState(combatState);
         getState(StateHandler.COMBATSTATE).init(container, this);
-        stateHandler.setCombatState((CombatState)getState(StateHandler.COMBATSTATE));        
+        combatStateLoader = new CombatStateLoader(combatState);
+        combatStateLoader.init(container, this);
+        stateHandler.setCombatState(combatState, combatStateLoader);
         enterState(StateHandler.MAINMENUSTATE);
     }
-    
+
     public void initHelpers(GameContainer container, StateBasedGame game) throws SlickException {
         imgArchive.init(container, game);
     }

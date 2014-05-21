@@ -5,7 +5,10 @@
  */
 package Player;
 
+import extendables.Enemy;
+import helpers.ImageArchive;
 import helpers.MathTool;
+import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,22 +22,26 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class PlayerHandler {
 
-    public static Player player;
+    private static Player player;
     private Image leenFace;
     private boolean dead = false;
-
-    public PlayerHandler() {
-        player = new Player(387, 500);
+    private PlayerProjectileManager projectileManager;
+    
+    public PlayerHandler(ArrayList<Enemy> enemies) {
+        player = new Player(387, 500, this);
+        projectileManager = new PlayerProjectileManager(enemies);
     }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         player.init(container, game);
+        projectileManager.init(container, game);
         MathTool.setPlayer(player);
-        leenFace = new Image("res/LeenFace.png");
+        leenFace = ImageArchive.getLeenFace();
     }
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         player.render(container, game, g);
+        projectileManager.render(container, game, g);
         drawHealthBars(g);
         drawLeenFace(g);
     }
@@ -44,6 +51,7 @@ public class PlayerHandler {
             dead = true;
         }
         player.update(container, game, delta);
+        projectileManager.update(container, game, delta);
     }
 
     public void drawHealthBars(Graphics g) {

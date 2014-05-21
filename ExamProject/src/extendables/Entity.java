@@ -38,7 +38,7 @@ public abstract class Entity implements SlickClass {
     
     
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g)  {
         texture.draw(xPos, yPos);
     }
 
@@ -49,19 +49,23 @@ public abstract class Entity implements SlickClass {
         pathing.setLocation(xPos + pathingX, yPos + pathingY);
     }
 
-    public void pathing(Rectangle r) {
+    public void pathing(Rectangle r, int delta) {
         if (pathing.intersects(r) && !pathing.equals(r)) {
-            if (pathing.getMaxY() - r.getMinY() < 4) {
-                setyPos(getyPos() - (pathing.getMaxY() - r.getMinY()));
+            //If this entity is above the Rectangle
+            if (pathing.getMaxY() - r.getMinY() < 7) {
+                setyPos(getyPos() - ((speed/2) * delta));
             }
-            if (pathing.getMaxY() - r.getMinY() > 18) {
-                setyPos(getyPos() + (r.getMaxY() - pathing.getMinY()));
+            //If this entity is below the Rectangle
+            if (r.getMaxY() - pathing.getMinY() < 7) {
+                setyPos(getyPos() + ((speed/2) * delta));
             }
-            if (pathing.getMaxX() - r.getMinX() < 4) {
-                setxPos(getxPos() - (pathing.getMaxX() - r.getMinX()));
+            //If this entity is left of the Rectangle
+            if (pathing.getMaxX() - r.getMinX() < 7) {
+                setxPos(getxPos() - ((speed/2) * delta));
             }
-            if (pathing.getMaxX() - r.getMinX() > 28) {
-                setxPos(getxPos() + (r.getMaxX() - pathing.getMinX()));
+            //If this entity is right of the Rectangle
+            if (r.getMaxX() - pathing.getMinX() < 7) {
+                setxPos(getxPos() + ((speed/2) * delta));
             }
 
         }

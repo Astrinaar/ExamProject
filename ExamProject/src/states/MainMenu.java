@@ -42,12 +42,12 @@ public class MainMenu extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        background = new Image("res/MainMenuBG.JPG");
-        buttonSinglePlayer = new StandardButton(new Image("res/ButtonSinglePlayer.png"), 264, 400) {
+        background = ImageArchive.getBackgroundMainMenu();
+        buttonSinglePlayer = new StandardButton(ImageArchive.getButtonSinglerPlayer(), 264, 400) {
             @Override
             public void Click() {
                 stateHandler.enterState(StateHandler.COMBATSTATE);
-                stateHandler.loadCombatState(ImageArchive.backgroundGrass);
+                stateHandler.loadCombatState("Rohan Grass");
             }
         };
     }

@@ -6,6 +6,7 @@
 package states;
 
 import examproject.ExamProject;
+import helpers.CombatStateLoader;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -20,6 +21,7 @@ public class StateHandler {
     private final ExamProject examProject;
     public static final int MAINMENUSTATE = 0;
     private CombatState combatState;
+    private CombatStateLoader combatStateLoader;
     public static final int COMBATSTATE = 1;
 
     public StateHandler(ExamProject examProject) {
@@ -34,12 +36,13 @@ public class StateHandler {
         examProject.enterState(id);
     }
 
-    public void loadCombatState(Image background) {
-        combatState.setBackground(background);
+    public void loadCombatState(String level) {
+        combatStateLoader.loadCombatState(level);
     }
 
-    public void setCombatState(CombatState combatState) {
+    public void setCombatState(CombatState combatState, CombatStateLoader combatStateLoader) {
         this.combatState = combatState;
+        this.combatStateLoader = combatStateLoader;
     }
 
 }

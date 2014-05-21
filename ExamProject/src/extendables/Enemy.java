@@ -11,9 +11,8 @@ package extendables;
  */
 public abstract class Enemy extends Entity {
 
-    MoveStrategy moveStrat;
-    String currentMoveStrat;
-    float baseScore;
+    public MoveStrategy moveStrat;
+    public String currentMoveStrat;
 
     public Enemy(float xPos, float yPos) {
         super(xPos, yPos);
@@ -31,8 +30,5 @@ public abstract class Enemy extends Entity {
         this.currentMoveStrat = currentMoveStrat;
     }
 
-    public float getScore() {
-        return baseScore;
-    }
 
 }
