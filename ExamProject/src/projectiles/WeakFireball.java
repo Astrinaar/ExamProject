@@ -6,8 +6,10 @@
 
 package projectiles;
 
+import extendables.Entity;
 import extendables.Projectile;
 import helpers.ImageArchive;
+import helpers.SkillHelper;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -23,8 +25,16 @@ public class WeakFireball extends Projectile{
         bounds = new Rectangle(xPos, yPos, texture.getWidth(), texture.getHeight());
         super.damage = 100;
         super.texture.setCenterOfRotation(7, 7);
-        super.speed = 0.3f;
+        super.speed = 0.5f;
         super.texture.setRotation((float) Math.toDegrees(angleInvX + 3.1416));
     }
+
+    @Override
+    public void collision(Entity e) {
+        super.collision(e);        
+        SkillHelper.fireball(e, 40, damage/2);
+    }
+     
+     
     
 }

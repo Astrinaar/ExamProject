@@ -33,7 +33,8 @@ public class PlayerProjectileManager implements SlickClass {
     private Iterator<Enemy> enemyiterator;
     private Input input;
 
-    private float weakFireballXOffset;
+    public static float weakFireballXOffset;
+    public static float sentryFireXOffset;
 
     public PlayerProjectileManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
@@ -68,13 +69,15 @@ public class PlayerProjectileManager implements SlickClass {
         }
     }
 
-    public void SpawnProjectile(float xPos, float yPos, int id) {
+    public void SpawnProjectile(float xPos, float yPos, float angle, int id) {
 
         switch (id) {
-            case 0:
-                float angle = MathTool.getAngle(input, weakFireballXOffset);
+            case 0:                
                 projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
                 break;
+            case 1:
+                projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
+                
         }
     }
 
@@ -86,6 +89,10 @@ public class PlayerProjectileManager implements SlickClass {
                 p.collision(e);
             }
         }
+    }
+    
+    public ArrayList<Projectile> getProjectiles(){
+        return projectiles;
     }
 
     public void reset() {

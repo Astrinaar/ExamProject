@@ -46,6 +46,9 @@ public abstract class Projectile {
     }
 
     public boolean checkCollision(Shape shape) {
+        if(lifeTime == 0){
+            return false;
+        }
         return bounds.intersects(shape);
     }
 

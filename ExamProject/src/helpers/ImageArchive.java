@@ -36,6 +36,12 @@ public class ImageArchive {
     
     //Projectiles
     private static Image weakFireball;
+    
+    //Effects
+    private static Image effectScorchedGround;
+    
+    //Skills
+    private static Image sentry;
 
     public ImageArchive() {
 
@@ -57,6 +63,14 @@ public class ImageArchive {
         //Enemies
         zombie = new Image("res/Zombie.png");
         bigZombie = new Image("res/BigZombie.png");
+        
+        //Projectiles
+        
+        //Effects
+        effectScorchedGround = new Image("res/EffectScorchedGround.png");
+        
+        //Skills
+        sentry = new Image("res/SkeletonMage.png");
     }
 
     //Backgrounds
@@ -104,5 +118,17 @@ public class ImageArchive {
         }
         return null;
     }
+    
+    //Effects
+    public static Image getEffectScorchedGround() {
+        return effectScorchedGround;
+    }
+    
+    //Skills
+    public static Image getSentry() {
+        return sentry;
+    }
+    
+    
     
 }

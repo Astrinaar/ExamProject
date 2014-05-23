@@ -12,6 +12,7 @@ import helpers.ImageArchive;
 import helpers.MathTool;
 import helpers.MoveRegister;
 import helpers.RandomTool;
+import helpers.SkillHelper;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.newdawn.slick.GameContainer;

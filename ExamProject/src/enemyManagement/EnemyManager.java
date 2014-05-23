@@ -27,9 +27,10 @@ public class EnemyManager implements SlickClass{
     private ArrayList<Enemy> enemies;
     private Iterator<Enemy> enemyiterator;
     private ComparatorY comparatorY;
+    
 
 
-    public EnemyManager(ArrayList<Enemy> enemies) throws SlickException {
+    public EnemyManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
         comparatorY = new ComparatorY();
     }

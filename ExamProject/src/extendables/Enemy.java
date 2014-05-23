@@ -5,6 +5,8 @@
  */
 package extendables;
 
+import helpers.SkillHelper;
+
 /**
  *
  * @author PK

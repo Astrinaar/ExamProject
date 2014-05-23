@@ -9,6 +9,7 @@ import Player.Player;
 import Player.PlayerHandler;
 import enemyManagement.EnemyManager;
 import extendables.Enemy;
+import helpers.SkillHelper;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -28,10 +29,12 @@ public class CombatState extends BasicGameState {
     private Image background;
     private PlayerHandler playerHandler;
     private EnemyManager enemyManager;
+    private SkillHelper skillHelper;
 
-    public CombatState(int id, StateHandler stateHandler) {
+    public CombatState(int id, StateHandler stateHandler, SkillHelper skillHelper) {
         this.id = id;
         this.stateHandler = stateHandler;
+        this.skillHelper = skillHelper;
     }
 
     @Override
@@ -41,24 +44,28 @@ public class CombatState extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        ArrayList<Enemy> enemies = new ArrayList<>();
+        ArrayList<Enemy> enemies = new ArrayList<>();        
         playerHandler = new PlayerHandler(enemies);
         playerHandler.init(container, game);
         enemyManager = new EnemyManager(enemies);
         enemyManager.init(container, game);
+        skillHelper.setEnemies(enemies);
+        skillHelper.setPlayerProjectileManager(playerHandler.getPlayerProjectileManager());
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         background.draw(0, 0);
-        playerHandler.render(container, game, g);
+        skillHelper.render(container, game, g);        
         enemyManager.render(container, game, g);
+        playerHandler.render(container, game, g);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         playerHandler.update(container, game, delta);
         enemyManager.update(container, game, delta);
+        skillHelper.update(container, game, delta);
     }
 
     public void load(Image background, ArrayList<Enemy> enemies){

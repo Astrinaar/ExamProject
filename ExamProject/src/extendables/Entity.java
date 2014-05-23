@@ -5,6 +5,7 @@
  */
 package extendables;
 
+import helpers.SkillHelper;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,12 +29,12 @@ public abstract class Entity implements SlickClass {
     protected Rectangle pathing;
     protected float pathingX;
     protected float pathingY;
+    protected float hundredPerSec = 0.1041667f;
 
     
     public Entity(float xPos, float yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-
     }
     
     
@@ -91,6 +92,10 @@ public abstract class Entity implements SlickClass {
     public float getxPos() {
         return xPos;
     }
+    
+    public float getxPosMiddle() {
+        return xPos + (texture.getWidth()/2);
+    }
 
     public void setxPos(float xPos) {
         this.xPos = xPos;
@@ -100,6 +105,10 @@ public abstract class Entity implements SlickClass {
 
     public float getyPos() {
         return yPos;
+    }
+    
+    public float getyPosMiddle() {
+        return yPos + (texture.getHeight()/2);
     }
 
     public void setyPos(float yPos) {

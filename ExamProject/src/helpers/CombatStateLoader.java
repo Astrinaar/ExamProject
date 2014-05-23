@@ -20,13 +20,15 @@ public class CombatStateLoader {
     
     private CombatState combatState;
     private EnemyArchive enemyArchive;
+    private SkillHelper skillHelper;
 
-    public CombatStateLoader(CombatState combatState) {
+    public CombatStateLoader(CombatState combatState, SkillHelper skillHelper) {
         this.combatState = combatState;
+        this.skillHelper = skillHelper;
     }
         
     public void init(GameContainer container, StateBasedGame game) throws SlickException{
-        enemyArchive = new EnemyArchive();
+        enemyArchive = new EnemyArchive(skillHelper);
     }
     
     

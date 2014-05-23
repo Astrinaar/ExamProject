@@ -7,6 +7,8 @@ package Player;
 
 import extendables.Entity;
 import helpers.ImageArchive;
+import helpers.MathTool;
+import helpers.SkillHelper;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -30,12 +32,14 @@ public class Player extends Entity {
     private float slowDuration;
     private float slowAmount = 0;
     private PlayerHandler playerHandler;
+    private SkillHelper skillHelper;
 
     private boolean isCasting = false;
     private float castingLockCount = 0;
     private float castingTime = 0;
     private float castingTimeMax;
     private int castID;
+    private float castCooldown = 50;
 
     public Player(float xPos, float yPos, PlayerHandler playerHandler) {
         super(xPos, yPos);
@@ -68,11 +72,11 @@ public class Player extends Entity {
     public void update(GameContainer container, StateBasedGame game, int delta) {
         input = container.getInput();
         if (castingLockCount > 0) {
-            castingLockCount -= 0.1041667f * delta;
+            castingLockCount -= hundredPerSec * delta;
         }
-        if (isCasting){
-            castingTime -= 0.1041667f * delta;
-            if(castingTime <= 0){
+        if (isCasting) {
+            castingTime -= hundredPerSec * delta;
+            if (castingTime <= 0) {
                 cast();
                 isCasting = false;
             }
@@ -86,6 +90,9 @@ public class Player extends Entity {
         }
         if (reloadTime >= -9) {
             reloadTime -= 0.5f * delta;
+        }
+        if(castCooldown > 0){
+            castCooldown -= hundredPerSec * delta;
         }
         reactToInput(container, delta);
         super.update(container, game, delta);
@@ -113,8 +120,11 @@ public class Player extends Entity {
             xPos -= speed * delta;
             isCasting = false;
         }
-        if (input.isKeyDown(Input.KEY_1) && !isCasting) {
+        if (input.isKeyDown(Input.KEY_1) && !isCasting && castCooldown <= 0) {
             useSkill(0);
+        }
+        if (input.isKeyDown(Input.KEY_2) && !isCasting && castCooldown <= 0) {
+            useSkill(1);
         }
     }
 
@@ -126,11 +136,17 @@ public class Player extends Entity {
                 castingTime = 100;
                 castingTimeMax = 100;
                 castID = 0;
+                castCooldown = 50;
+                break;
+            case 1:
+                SkillHelper.sentry(input.getMouseX(), input.getMouseY());
+                castCooldown = 50;
+                break;
         }
     }
-    
-    public void cast(){
-        playerHandler.SpawnProjectile(castID);
+
+    public void cast() {
+        playerHandler.SpawnProjectile(MathTool.getAngle(input, PlayerProjectileManager.weakFireballXOffset), castID);
     }
 
     @Override
@@ -156,8 +172,8 @@ public class Player extends Entity {
         castingLockCount = 0;
         castingTime = 0;
     }
-    
-    public boolean isCasting(){
+
+    public boolean isCasting() {
         return isCasting;
     }
 
@@ -168,6 +184,5 @@ public class Player extends Entity {
     public float getCastingTimeMax() {
         return castingTimeMax;
     }
-    
-    
+
 }

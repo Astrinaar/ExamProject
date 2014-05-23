@@ -30,6 +30,13 @@ public class MathTool {
         return angle;
     }
     
+    public static float getAngleBetweenTwoPoints(float xOrigin, float yOrigin, float xTarget, float yTarget, float projectileXOffset) {
+        float deltax = xTarget - projectileXOffset - xOrigin;
+        float deltay = yTarget - projectileXOffset - yOrigin;
+        float angle = (float) Math.atan2(deltax, deltay);
+        return angle;
+    }
+    
     public static float getDistanceToPlayer(float xPos, float yPos) {
         float deltax = xPos - (player.getxPos() + player.getTexture().getWidth()/2);
         float deltay = yPos - (player.getyPos() + player.getTexture().getHeight()/2);

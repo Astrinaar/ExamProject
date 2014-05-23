@@ -6,8 +6,10 @@
 package Player;
 
 import extendables.Enemy;
+import extendables.Projectile;
 import helpers.ImageArchive;
 import helpers.MathTool;
+import helpers.SkillHelper;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -26,10 +28,12 @@ public class PlayerHandler {
     private Image leenFace;
     private boolean dead = false;
     private PlayerProjectileManager projectileManager;
+    private SkillHelper skillHelper;
 
     public PlayerHandler(ArrayList<Enemy> enemies) {
         player = new Player(387, 500, this);
         projectileManager = new PlayerProjectileManager(enemies);
+        this.skillHelper = skillHelper;
     }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -57,8 +61,8 @@ public class PlayerHandler {
         projectileManager.update(container, game, delta);
     }
 
-    public void SpawnProjectile(int id) {
-        projectileManager.SpawnProjectile(player.getxPos(), player.getyPos(), id);
+    public void SpawnProjectile(float angle, int id) {
+        projectileManager.SpawnProjectile(player.getxPos(), player.getyPos(), angle, id);
     }
 
     public void drawHealthBar(Graphics g) {
@@ -91,6 +95,10 @@ public class PlayerHandler {
 
     public static Player getPlayer() {
         return player;
+    }
+    
+    public PlayerProjectileManager getPlayerProjectileManager(){
+        return projectileManager;
     }
 
     public boolean isDead() {

@@ -7,6 +7,7 @@ package enemyManagement;
 
 import enemies.Zombie;
 import extendables.Enemy;
+import helpers.SkillHelper;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +18,10 @@ public class EnemyArchive {
 
     private ArrayList<Enemy> enemies;
     private int count;
+    private SkillHelper skillHelper;
 
-    public EnemyArchive() {
-
+    public EnemyArchive(SkillHelper skillHelper) {
+        this.skillHelper = skillHelper;
     }
 
     public void prepareArrayList() {
