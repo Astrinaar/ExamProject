@@ -51,6 +51,7 @@ public class CombatState extends BasicGameState {
         enemyManager.init(container, game);
         skillHelper.setEnemies(enemies);
         skillHelper.setPlayerProjectileManager(playerHandler.getPlayerProjectileManager());
+        skillHelper.setPlayer();
     }
 
     @Override

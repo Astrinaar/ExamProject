@@ -5,7 +5,10 @@
  */
 package helpers;
 
+import Player.Player;
+import Player.PlayerHandler;
 import Player.PlayerProjectileManager;
+import effects.Knockback;
 import effects.fireballGroundEffect;
 import extendables.Effect;
 import extendables.Enemy;
@@ -33,6 +36,7 @@ public class SkillHelper implements SlickClass {
     private static ArrayList<Entity> entities;
     private Iterator<Entity> entitiesIterator;
     private static PlayerProjectileManager playerProjectileManager;
+    private static Player player;
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -81,6 +85,10 @@ public class SkillHelper implements SlickClass {
     public void setPlayerProjectileManager(PlayerProjectileManager playerProjectileManager) {
         this.playerProjectileManager = playerProjectileManager;
     }
+    
+    public void setPlayer(){
+        player = PlayerHandler.getPlayer();
+    }
 
     public static void areaDamageExclusive(float xPos, float yPos, float radius, float damage) {
         enemyiterator = enemies.iterator();
@@ -111,11 +119,13 @@ public class SkillHelper implements SlickClass {
         entities.add(new Sentry(xPos, yPos));
     }
 
-    public static void sentryFire(Entity e) {
+    public static Entity sentryFire(Entity e) {
         Entity target = findTarget(e);
         if (target != null) {
-            playerProjectileManager.SpawnProjectile(e.getxPosMiddle(), e.getyPosMiddle(), MathTool.getAngleBetweenTwoPoints(e.getxPosMiddle(), e.getyPosMiddle(), target.getxPosMiddle(), target.getyPosMiddle(), PlayerProjectileManager.weakFireballXOffset), 1);
+            playerProjectileManager.SpawnProjectileFromPoint(e.getxPos(), e.getyPos(), target.getxPosMiddle(), target.getyPosMiddle(), MathTool.getAngleBetweenTwoPoints(e.getxPos(), e.getyPos(), target.getxPosMiddle(), target.getyPosMiddle(), PlayerProjectileManager.weakFireballXOffset), 1);
+            return target;
         }
+        return null;
     }
 
     public static Entity findTarget(Entity e) {
@@ -131,6 +141,15 @@ public class SkillHelper implements SlickClass {
             }
         }
         return closestTarget;
+    }
+    
+    public static void bigZombieSmash(float xPos, float yPos, float damage){
+        System.out.println(MathTool.getDistanceToPlayer(xPos, yPos));
+        if(MathTool.getDistanceToPlayer(xPos, yPos) < 50){
+            player.receiveDamage(damage);
+            float angle = MathTool.getAngleToPlayer(xPos, yPos);
+            effects.add(new Knockback(player, angle));
+        }
     }
 
 }

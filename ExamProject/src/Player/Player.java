@@ -9,6 +9,7 @@ import extendables.Entity;
 import helpers.ImageArchive;
 import helpers.MathTool;
 import helpers.SkillHelper;
+import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -31,8 +32,7 @@ public class Player extends Entity {
     private boolean slowed = false;
     private float slowDuration;
     private float slowAmount = 0;
-    private PlayerHandler playerHandler;
-    private SkillHelper skillHelper;
+    private final PlayerHandler playerHandler;
 
     private boolean isCasting = false;
     private float castingLockCount = 0;
@@ -40,6 +40,8 @@ public class Player extends Entity {
     private float castingTimeMax;
     private int castID;
     private float castCooldown = 50;
+
+    private float skill1CD = 0;
 
     public Player(float xPos, float yPos, PlayerHandler playerHandler) {
         super(xPos, yPos);
@@ -91,9 +93,11 @@ public class Player extends Entity {
         if (reloadTime >= -9) {
             reloadTime -= 0.5f * delta;
         }
-        if(castCooldown > 0){
+        if (castCooldown > 0) {
             castCooldown -= hundredPerSec * delta;
         }
+
+        reduceCooldowns(delta);
         reactToInput(container, delta);
         super.update(container, game, delta);
     }
@@ -123,8 +127,14 @@ public class Player extends Entity {
         if (input.isKeyDown(Input.KEY_1) && !isCasting && castCooldown <= 0) {
             useSkill(0);
         }
-        if (input.isKeyDown(Input.KEY_2) && !isCasting && castCooldown <= 0) {
+        if (input.isKeyDown(Input.KEY_2) && !isCasting && castCooldown <= 0 && skill1CD <= 0) {
             useSkill(1);
+        }
+    }
+
+    public void reduceCooldowns(int delta) {
+        if (skill1CD > 0) {
+            skill1CD -= hundredPerSec * delta;
         }
     }
 
@@ -141,6 +151,7 @@ public class Player extends Entity {
             case 1:
                 SkillHelper.sentry(input.getMouseX(), input.getMouseY());
                 castCooldown = 50;
+                skill1CD = 600;
                 break;
         }
     }

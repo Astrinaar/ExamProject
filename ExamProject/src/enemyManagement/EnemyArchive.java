@@ -5,6 +5,7 @@
  */
 package enemyManagement;
 
+import enemies.BigZombie;
 import enemies.Zombie;
 import extendables.Enemy;
 import helpers.SkillHelper;
@@ -59,6 +60,11 @@ public class EnemyArchive {
 
     public void addZombie() {
         enemies.add(new Zombie(getNextXPos(), getNextYPos()));
+        count++;
+    }
+    
+    public void addBigZombie() {
+        enemies.add(new BigZombie(getNextXPos(), getNextYPos()));
         count++;
     }
 

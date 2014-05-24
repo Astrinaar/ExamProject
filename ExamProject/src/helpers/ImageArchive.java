@@ -36,6 +36,7 @@ public class ImageArchive {
     
     //Projectiles
     private static Image weakFireball;
+    private static Image arrow;
     
     //Effects
     private static Image effectScorchedGround;
@@ -67,10 +68,10 @@ public class ImageArchive {
         //Projectiles
         
         //Effects
-        effectScorchedGround = new Image("res/EffectScorchedGround.png");
+        effectScorchedGround = new Image("res/EffectScorchedGround1.png");
         
         //Skills
-        sentry = new Image("res/SkeletonMage.png");
+        sentry = new Image("res/Sentry1.png");
     }
 
     //Backgrounds
@@ -113,6 +114,15 @@ public class ImageArchive {
     public static Image getWeakFireball() {
         try {
             return new Image("res/WeakFireball.png");
+        } catch (SlickException ex) {
+            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static Image getArrow() {
+        try {
+            return new Image("res/Arrow1.png");
         } catch (SlickException ex) {
             Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -70,8 +70,8 @@ public class Zombie extends Enemy {
         if (MathTool.getDistanceToPlayer(xPos + texture.getWidth() / 2, yPos + texture.getHeight() / 2) < 30 && attackReload <= 0) {
             attack();
         }
-        if(!(MathTool.getDistanceToPlayer(xPos + texture.getWidth() / 2, yPos + texture.getHeight() / 2) < 25)) {
-        moveStrat.move(this, delta);
+        if (!(MathTool.getDistanceToPlayer(xPos + texture.getWidth() / 2, yPos + texture.getHeight() / 2) < 25)) {
+            moveStrat.move(this, delta);
         }
     }
 

@@ -17,7 +17,7 @@ public class MoveFollow implements MoveStrategy {
 
     @Override
     public void move(Enemy e, int delta) {
-        float angle = MathTool.getAngleToPlayer(e.getxPos(), e.getyPos());
+        float angle = MathTool.getAngleToPlayer(e.getxPosMiddle(), e.getyPosMiddle());
         e.setyPos(e.getyPos() + e.getSpeed() * (float) Math.cos(angle) * delta);
         e.setxPos(e.getxPos() + e.getSpeed() * (float) Math.sin(angle) * delta);
     }

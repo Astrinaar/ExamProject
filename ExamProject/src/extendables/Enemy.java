@@ -31,6 +31,8 @@ public abstract class Enemy extends Entity {
     public void setCurrentMoveStrat(String currentMoveStrat) {
         this.currentMoveStrat = currentMoveStrat;
     }
+    
+    
 
 
 }

@@ -28,12 +28,10 @@ public class PlayerHandler {
     private Image leenFace;
     private boolean dead = false;
     private PlayerProjectileManager projectileManager;
-    private SkillHelper skillHelper;
 
     public PlayerHandler(ArrayList<Enemy> enemies) {
         player = new Player(387, 500, this);
         projectileManager = new PlayerProjectileManager(enemies);
-        this.skillHelper = skillHelper;
     }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -62,7 +60,7 @@ public class PlayerHandler {
     }
 
     public void SpawnProjectile(float angle, int id) {
-        projectileManager.SpawnProjectile(player.getxPos(), player.getyPos(), angle, id);
+        projectileManager.SpawnProjectileFromPlayer(player.getxPos(), player.getyPos(), angle, id);
     }
 
     public void drawHealthBar(Graphics g) {
@@ -84,7 +82,7 @@ public class PlayerHandler {
         g.setColor(Color.black);
         g.fillRect(75, 43, 100, 20);
         g.setColor(Color.blue);
-        g.fillRect(76, 44, (98) * (player.getCastingTime() / player.getCastingTimeMax()), 18);
+        g.fillRect(76, 44, (98) * (1 - player.getCastingTime() / player.getCastingTimeMax()), 18);
 //        g.setColor(Color.white);
 //        g.drawString("" + player.getCastingTime(), 85, 66);
     }

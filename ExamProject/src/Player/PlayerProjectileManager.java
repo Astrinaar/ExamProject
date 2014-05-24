@@ -19,6 +19,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import projectiles.SentryFire;
 import projectiles.WeakFireball;
 
 /**
@@ -35,6 +36,7 @@ public class PlayerProjectileManager implements SlickClass {
 
     public static float weakFireballXOffset;
     public static float sentryFireXOffset;
+    public static float sentryFireYOffset;
 
     public PlayerProjectileManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
@@ -44,6 +46,8 @@ public class PlayerProjectileManager implements SlickClass {
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         weakFireballXOffset = ImageArchive.getWeakFireball().getWidth() / 2;
+        sentryFireXOffset = ImageArchive.getArrow().getWidth() / 2;
+        sentryFireYOffset = ImageArchive.getArrow().getHeight() / 2;
     }
 
     @Override
@@ -69,15 +73,26 @@ public class PlayerProjectileManager implements SlickClass {
         }
     }
 
-    public void SpawnProjectile(float xPos, float yPos, float angle, int id) {
+    public void SpawnProjectileFromPlayer(float xPos, float yPos, float angle, int id) {
 
         switch (id) {
-            case 0:                
+            case 0:
                 projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
                 break;
             case 1:
-                projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
-                
+                break;
+        }
+    }
+
+    public void SpawnProjectileFromPoint(float xPosOrigin, float yPosOrigin, float xPosTarget, float yPosTarget, float angle, int id) {
+
+        switch (id) {
+            case 0:
+
+                break;
+            case 1:
+                projectiles.add(new SentryFire(xPosOrigin - sentryFireXOffset, yPosOrigin - sentryFireYOffset, angle, MathTool.getAngleBetweenTwoPointsInvY(xPosOrigin, yPosOrigin, xPosTarget, yPosTarget, sentryFireXOffset)));
+
         }
     }
 
@@ -90,8 +105,8 @@ public class PlayerProjectileManager implements SlickClass {
             }
         }
     }
-    
-    public ArrayList<Projectile> getProjectiles(){
+
+    public ArrayList<Projectile> getProjectiles() {
         return projectiles;
     }
 

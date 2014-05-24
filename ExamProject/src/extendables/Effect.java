@@ -25,6 +25,10 @@ public abstract class Effect implements SlickClass {
     protected float lifeTime;
     
 
+    public Effect(){
+        
+    }
+    
     public Effect(float xPos, float yPos, Image texture) {
         this.texture = texture;
         this.xPos = xPos - (texture.getWidth()/2);

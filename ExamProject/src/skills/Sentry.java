@@ -8,8 +8,10 @@ package skills;
 import extendables.Enemy;
 import extendables.Entity;
 import helpers.ImageArchive;
+import helpers.MathTool;
 import helpers.SkillHelper;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -20,6 +22,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Sentry extends Entity {
 
     private float reloadTime = 50;
+    private Entity target;
 
     public Sentry(float xPos, float yPos) {
         super(xPos, yPos);
@@ -32,11 +35,19 @@ public class Sentry extends Entity {
     }
 
     @Override
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
+        if (target != null) {
+            texture.setRotation((float) Math.toDegrees(MathTool.getAngleBetweenTwoPointsInvY(xPos, yPos, target.getxPosMiddle(), target.getyPosMiddle(), Player.PlayerProjectileManager.sentryFireXOffset)));
+        }
+        texture.draw(xPos - (texture.getWidth() / 2), yPos - (texture.getHeight() / 2));
+    }
+
+    @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
         enforceBorders(container);
         reloadTime -= hundredPerSec * delta;
         if (reloadTime <= 0) {
-            SkillHelper.sentryFire(this);
+            target = SkillHelper.sentryFire(this);
             reloadTime = 50;
         }
     }

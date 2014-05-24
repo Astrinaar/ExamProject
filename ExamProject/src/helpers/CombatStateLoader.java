@@ -42,9 +42,7 @@ public class CombatStateLoader {
     
     public void rohanGrass(){
         enemyArchive.prepareArrayList();
-        enemyArchive.addZombie();
-        enemyArchive.addZombie();
-        enemyArchive.addZombie();
+        enemyArchive.addBigZombie();
         combatState.load(ImageArchive.getBackgroundGrass(), enemyArchive.getArrayList());
     }
     

@@ -21,6 +21,8 @@ public abstract class Entity implements SlickClass {
 
     protected float xPos;
     protected float yPos;
+    protected float xPosMiddle;
+    protected float yPosMiddle;
     protected Image texture;
     protected Rectangle bounds;
     protected float life;
@@ -30,6 +32,7 @@ public abstract class Entity implements SlickClass {
     protected float pathingX;
     protected float pathingY;
     protected float hundredPerSec = 0.1041667f;
+    protected boolean boss = false;
 
     
     public Entity(float xPos, float yPos) {
@@ -94,7 +97,7 @@ public abstract class Entity implements SlickClass {
     }
     
     public float getxPosMiddle() {
-        return xPos + (texture.getWidth()/2);
+        return xPosMiddle;
     }
 
     public void setxPos(float xPos) {
@@ -108,7 +111,7 @@ public abstract class Entity implements SlickClass {
     }
     
     public float getyPosMiddle() {
-        return yPos + (texture.getHeight()/2);
+        return yPosMiddle;
     }
 
     public void setyPos(float yPos) {
@@ -127,6 +130,8 @@ public abstract class Entity implements SlickClass {
 
     public void updateBounds() {
         bounds.setLocation(xPos, yPos);
+        xPosMiddle = xPos + texture.getWidth() / 2;
+        yPosMiddle = yPos + texture.getHeight() / 2;
     }
 
     public Rectangle getPathing() {
@@ -148,6 +153,12 @@ public abstract class Entity implements SlickClass {
     public float getMaxLife() {
         return maxLife;
     }
+
+    public boolean isBoss() {
+        return boss;
+    }
+    
+    
 
     public void enforceBorders(GameContainer container) {
         if (xPos < 0) {
