@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package projectiles;
 
 import extendables.Entity;
@@ -17,24 +16,22 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author PK
  */
-public class WeakFireball extends Projectile{
-    
-     public WeakFireball(float xPos, float yPos, float angle, float angleInvX) {
+public class WeakFireball extends Projectile {
+
+    public WeakFireball(float xPos, float yPos, float angle) {
         super(xPos, yPos, angle);
         super.texture = ImageArchive.getWeakFireball();
         bounds = new Rectangle(xPos, yPos, texture.getWidth(), texture.getHeight());
         super.damage = 100;
         super.texture.setCenterOfRotation(7, 7);
         super.speed = 0.5f;
-        super.texture.setRotation((float) Math.toDegrees(angleInvX + 3.1416));
+        super.texture.setRotation((float) Math.toDegrees(angle * -1 + 3.1416));
     }
 
     @Override
     public void collision(Entity e) {
-        super.collision(e);        
-        SkillHelper.fireball(e, 40, damage/2);
+        super.collision(e);
+        SkillHelper.fireball(e, 40, damage / 2);
     }
-     
-     
-    
+
 }

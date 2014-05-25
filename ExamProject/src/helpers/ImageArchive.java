@@ -21,6 +21,7 @@ public class ImageArchive {
     //Backgrounds
     private static Image backgroundGrass;
     private static Image backgroundMainMenu;
+    private static Image backgroundBottomBorder;
 
     //Buttons
     private static Image buttonSinglerPlayer;
@@ -33,14 +34,16 @@ public class ImageArchive {
     //Enemies
     private static Image zombie;
     private static Image bigZombie;
-    
+
     //Projectiles
     private static Image weakFireball;
     private static Image arrow;
-    
+    private static Image arrowFire;
+    private static Image push;
+
     //Effects
     private static Image effectScorchedGround;
-    
+
     //Skills
     private static Image sentry;
 
@@ -52,6 +55,7 @@ public class ImageArchive {
         //Backgrounds
         backgroundGrass = new Image("res/BackgroundGrass.png");
         backgroundMainMenu = new Image("res/MainMenuBG.JPG");
+        backgroundBottomBorder = new Image("res/BottomBorder.png");
 
         //Buttons
         buttonSinglerPlayer = new Image("res/ButtonSinglePlayer.png");
@@ -59,17 +63,16 @@ public class ImageArchive {
         //Player related
         player = new Image("res/Player.png");
         playerSlowedTint = new Image("res/PlayerSlowed.png");
-        leenFace = new Image("res/LeenFace.png");
-        
+        leenFace = new Image("res/LeenFace50.png");
+
         //Enemies
         zombie = new Image("res/Zombie.png");
         bigZombie = new Image("res/BigZombie.png");
-        
+
         //Projectiles
-        
         //Effects
         effectScorchedGround = new Image("res/EffectScorchedGround1.png");
-        
+
         //Skills
         sentry = new Image("res/Sentry1.png");
     }
@@ -81,6 +84,10 @@ public class ImageArchive {
 
     public static Image getBackgroundMainMenu() {
         return backgroundMainMenu;
+    }
+
+    public static Image getBackgroundBottomBorder() {
+        return backgroundBottomBorder;
     }
 
     //Buttons
@@ -100,7 +107,7 @@ public class ImageArchive {
     public static Image getLeenFace() {
         return leenFace;
     }
-    
+
     //Enemies
     public static Image getZombie() {
         return zombie;
@@ -109,7 +116,7 @@ public class ImageArchive {
     public static Image getBigZombie() {
         return bigZombie;
     }
-    
+
     //Projectiles
     public static Image getWeakFireball() {
         try {
@@ -119,7 +126,7 @@ public class ImageArchive {
         }
         return null;
     }
-    
+
     public static Image getArrow() {
         try {
             return new Image("res/Arrow1.png");
@@ -128,17 +135,33 @@ public class ImageArchive {
         }
         return null;
     }
-    
+
+    public static Image getArrowFire() {
+        try {
+            return new Image("res/ArrowFire.png");
+        } catch (SlickException ex) {
+            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static Image getPush() {
+        try {
+            return new Image("res/Push.png");
+        } catch (SlickException ex) {
+            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     //Effects
     public static Image getEffectScorchedGround() {
         return effectScorchedGround;
     }
-    
+
     //Skills
     public static Image getSentry() {
         return sentry;
     }
-    
-    
-    
+
 }

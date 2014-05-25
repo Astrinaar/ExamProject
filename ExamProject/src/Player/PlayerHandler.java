@@ -59,22 +59,22 @@ public class PlayerHandler {
         projectileManager.update(container, game, delta);
     }
 
-    public void SpawnProjectile(float angle, int id) {
+    public void SpawnProjectileFromPlayer(float angle, int id) {
         projectileManager.SpawnProjectileFromPlayer(player.getxPos(), player.getyPos(), angle, id);
     }
 
     public void drawHealthBar(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(75, 17, 100, 20);
+        g.fillRect(120, 555, 150, 16);
         if (player.getLife() > 0) {
             g.setColor(Color.red);
-            g.fillRect(76, 18, (98) * (player.getLife() / player.getMaxLife()), 18);
+            g.fillRect(121, 556, (148) * (player.getLife() / player.getMaxLife()), 14);
         }
         g.setColor(Color.white);
         if (player.getLife() > 0) {
-            g.drawString((int) player.getLife() + " / " + (int) player.getMaxLife(), 85, 18);
+            g.drawString((int) player.getLife() + " / " + (int) player.getMaxLife(), 150, 554);
         } else {
-            g.drawString(0 + " / " + (int) player.getMaxLife(), 85, 18);
+            g.drawString(0 + " / " + (int) player.getMaxLife(), 150, 554);
         }
     }
 
@@ -88,7 +88,7 @@ public class PlayerHandler {
     }
 
     public void drawLeenFace(Graphics g) {
-        leenFace.draw(5, 5);
+        leenFace.draw(60, 550);
     }
 
     public static Player getPlayer() {

@@ -29,7 +29,7 @@ public class BigZombie extends Boss {
     private float damage = 30;
     private float attackReload = 0;
     private float slowAmount = 0.40f;
-    private float slowDuration = 750;
+    private float slowDuration = 300;
     private boolean aggro = false;
     private float skill0CD;
 
@@ -51,15 +51,22 @@ public class BigZombie extends Boss {
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) {
-        if (!isCasting) {
-            act(delta);
-        }
+    public void update(GameContainer container, StateBasedGame game, int delta) {        
         super.update(container, game, delta);
         if(skill0CD > 0){
         skill0CD -= hundredPerSec * delta;
         }
     }
+
+    @Override
+    public void stoppedByStun(GameContainer container, int delta) {
+        super.stoppedByStun(container, delta);
+        if (!isCasting) {
+            act(delta);
+        }
+    }
+    
+    
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) {

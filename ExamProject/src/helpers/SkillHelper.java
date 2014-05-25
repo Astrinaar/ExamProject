@@ -8,6 +8,8 @@ package helpers;
 import Player.Player;
 import Player.PlayerHandler;
 import Player.PlayerProjectileManager;
+import static Player.PlayerProjectileManager.sentryFireXOffset;
+import static Player.PlayerProjectileManager.sentryFireYOffset;
 import effects.Knockback;
 import effects.fireballGroundEffect;
 import extendables.Effect;
@@ -21,6 +23,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import projectiles.SentryFire;
 import skills.Sentry;
 
 /**
@@ -110,6 +113,8 @@ public class SkillHelper implements SlickClass {
         }
     }
 
+    
+    //Player skills
     public static void fireball(Entity target, float radius, float damage) {
         areaDamageExclusive(target.getxPosMiddle(), target.getyPosMiddle(), radius, damage);
         effects.add(new fireballGroundEffect(target.getxPosMiddle(), target.getyPosMiddle(), ImageArchive.getEffectScorchedGround()));
@@ -127,7 +132,15 @@ public class SkillHelper implements SlickClass {
         }
         return null;
     }
+    
+    public static void push(Entity target, float angle, float damage, float slowAmount, float slowDuration){
+        target.receiveDamage(damage);
+        target.slow(slowAmount, slowDuration);
+        effects.add(new Knockback(target, angle, 15));
+    }
 
+    
+    //Help
     public static Entity findTarget(Entity e) {
         float minDistance = 9999;
         Entity closestTarget = null;
@@ -143,12 +156,13 @@ public class SkillHelper implements SlickClass {
         return closestTarget;
     }
     
+    
+    //Boss skills
     public static void bigZombieSmash(float xPos, float yPos, float damage){
-        System.out.println(MathTool.getDistanceToPlayer(xPos, yPos));
         if(MathTool.getDistanceToPlayer(xPos, yPos) < 50){
             player.receiveDamage(damage);
             float angle = MathTool.getAngleToPlayer(xPos, yPos);
-            effects.add(new Knockback(player, angle));
+            effects.add(new Knockback(player, angle, 15));
         }
     }
 

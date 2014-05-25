@@ -5,6 +5,7 @@
  */
 package skills;
 
+import Player.*;
 import extendables.Enemy;
 import extendables.Entity;
 import helpers.ImageArchive;
@@ -28,6 +29,7 @@ public class Sentry extends Entity {
         super(xPos, yPos);
         setLife(100);
         texture = ImageArchive.getSentry();
+        Player player = PlayerHandler.getPlayer();
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Sentry extends Entity {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) {
         if (target != null) {
-            texture.setRotation((float) Math.toDegrees(MathTool.getAngleBetweenTwoPointsInvY(xPos, yPos, target.getxPosMiddle(), target.getyPosMiddle(), Player.PlayerProjectileManager.sentryFireXOffset)));
+            texture.setRotation((float) Math.toDegrees(MathTool.getAngleBetweenTwoPointsInvY(xPos, yPos, target.getxPosMiddle(), target.getyPosMiddle(), PlayerProjectileManager.sentryFireXOffset)));
         }
         texture.draw(xPos - (texture.getWidth() / 2), yPos - (texture.getHeight() / 2));
     }

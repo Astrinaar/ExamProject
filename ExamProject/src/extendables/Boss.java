@@ -40,6 +40,12 @@ public class Boss extends Enemy {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
         super.update(container, game, delta);
+        
+    }
+
+    @Override
+    public void stoppedByStun(GameContainer container, int delta) {
+        super.stoppedByStun(container, delta);
         if (isCasting) {
             castingTime -= hundredPerSec * delta;
             if (castingTime <= 0) {
@@ -48,6 +54,17 @@ public class Boss extends Enemy {
             }
         }
     }
+
+    @Override
+    public void stun(float duration) {
+        super.stun(duration);
+        isCasting = false;
+        castingTime = 0;
+        castingTimeMax = 0;
+    }
+    
+    
+    
 
     
     public void useSkill(int id) {

@@ -9,6 +9,7 @@ import Player.Player;
 import Player.PlayerHandler;
 import enemyManagement.EnemyManager;
 import extendables.Enemy;
+import helpers.ImageArchive;
 import helpers.SkillHelper;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
@@ -27,6 +28,7 @@ public class CombatState extends BasicGameState {
     private int id;
     private StateHandler stateHandler;
     private Image background;
+    private Image bottomBorder;
     private PlayerHandler playerHandler;
     private EnemyManager enemyManager;
     private SkillHelper skillHelper;
@@ -44,6 +46,7 @@ public class CombatState extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        bottomBorder = ImageArchive.getBackgroundBottomBorder();
         ArrayList<Enemy> enemies = new ArrayList<>();        
         playerHandler = new PlayerHandler(enemies);
         playerHandler.init(container, game);
@@ -57,6 +60,7 @@ public class CombatState extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         background.draw(0, 0);
+        bottomBorder.draw(0, 550);
         skillHelper.render(container, game, g);        
         enemyManager.render(container, game, g);
         playerHandler.render(container, game, g);

@@ -29,10 +29,10 @@ public class Player extends Entity {
     private float reloadTime;
     private final float doubleDirectionMultiplier = 0.707114f;
     private float originalSpeed;
-    private boolean slowed = false;
-    private float slowDuration;
-    private float slowAmount = 0;
     private final PlayerHandler playerHandler;
+    
+    private boolean physicalManipulationSentry = true;
+    private boolean manaManipulationSentry = true;
 
     private boolean isCasting = false;
     private float castingLockCount = 0;
@@ -42,6 +42,7 @@ public class Player extends Entity {
     private float castCooldown = 50;
 
     private float skill1CD = 0;
+    private float skill2CD = 0;
 
     public Player(float xPos, float yPos, PlayerHandler playerHandler) {
         super(xPos, yPos);
@@ -76,6 +77,19 @@ public class Player extends Entity {
         if (castingLockCount > 0) {
             castingLockCount -= hundredPerSec * delta;
         }
+        if (reloadTime >= -9) {
+            reloadTime -= 0.5f * delta;
+        }
+        if (castCooldown > 0) {
+            castCooldown -= hundredPerSec * delta;
+        }
+        reduceCooldowns(delta);
+        super.update(container, game, delta);
+    }
+
+    @Override
+    public void stoppedByStun(GameContainer container, int delta) {
+        super.stoppedByStun(container, delta);
         if (isCasting) {
             castingTime -= hundredPerSec * delta;
             if (castingTime <= 0) {
@@ -83,23 +97,7 @@ public class Player extends Entity {
                 isCasting = false;
             }
         }
-        if (slowed) {
-            slowDuration -= 0.5f * delta;
-            if (slowDuration <= 0) {
-                slowAmount = 0;
-                slowed = false;
-            }
-        }
-        if (reloadTime >= -9) {
-            reloadTime -= 0.5f * delta;
-        }
-        if (castCooldown > 0) {
-            castCooldown -= hundredPerSec * delta;
-        }
-
-        reduceCooldowns(delta);
         reactToInput(container, delta);
-        super.update(container, game, delta);
     }
 
     private void reactToInput(GameContainer container, int delta) {
@@ -130,11 +128,17 @@ public class Player extends Entity {
         if (input.isKeyDown(Input.KEY_2) && !isCasting && castCooldown <= 0 && skill1CD <= 0) {
             useSkill(1);
         }
+        if (input.isKeyDown(Input.KEY_3) && !isCasting && castCooldown <= 0 && skill2CD <= 0) {
+            useSkill(2);
+        }
     }
 
     public void reduceCooldowns(int delta) {
         if (skill1CD > 0) {
             skill1CD -= hundredPerSec * delta;
+        }
+        if (skill2CD > 0) {
+            skill2CD -= hundredPerSec * delta;
         }
     }
 
@@ -153,22 +157,31 @@ public class Player extends Entity {
                 castCooldown = 50;
                 skill1CD = 600;
                 break;
+            case 2:
+                playerHandler.SpawnProjectileFromPlayer(MathTool.getAngle(input, PlayerProjectileManager.pushXOffset), id);
+                castCooldown = 50;
+                skill2CD = 500;
+                break;
         }
     }
 
     public void cast() {
-        playerHandler.SpawnProjectile(MathTool.getAngle(input, PlayerProjectileManager.weakFireballXOffset), castID);
+        playerHandler.SpawnProjectileFromPlayer(MathTool.getAngle(input, PlayerProjectileManager.weakFireballXOffset), castID);
     }
+
+    @Override
+    public void stun(float duration) {
+        super.stun(duration);
+        isCasting = false;
+        castingTime = 0;
+        castingTimeMax = 0;
+    }
+    
+    
 
     @Override
     public void updateBounds() {
         bounds.setLocation(xPos + 3, yPos + 3);
-    }
-
-    public void slow(float amount, float duration) {
-        slowed = true;
-        slowAmount = amount;
-        slowDuration = duration;
     }
 
     public void reset() {
@@ -182,6 +195,8 @@ public class Player extends Entity {
         isCasting = false;
         castingLockCount = 0;
         castingTime = 0;
+        stunned = false;
+        knockback = false;
     }
 
     public boolean isCasting() {
@@ -195,5 +210,15 @@ public class Player extends Entity {
     public float getCastingTimeMax() {
         return castingTimeMax;
     }
+
+    public boolean isPhysicalManipulationSentry() {
+        return physicalManipulationSentry;
+    }
+
+    public boolean isManaManipulationSentry() {
+        return manaManipulationSentry;
+    }
+    
+    
 
 }

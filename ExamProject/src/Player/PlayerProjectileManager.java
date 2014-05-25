@@ -19,6 +19,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import projectiles.Push;
 import projectiles.SentryFire;
 import projectiles.WeakFireball;
 
@@ -33,10 +34,12 @@ public class PlayerProjectileManager implements SlickClass {
     private Iterator<Projectile> projectileiterator;
     private Iterator<Enemy> enemyiterator;
     private Input input;
+    private Player player;
 
     public static float weakFireballXOffset;
     public static float sentryFireXOffset;
     public static float sentryFireYOffset;
+    public static float pushXOffset;
 
     public PlayerProjectileManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
@@ -48,6 +51,8 @@ public class PlayerProjectileManager implements SlickClass {
         weakFireballXOffset = ImageArchive.getWeakFireball().getWidth() / 2;
         sentryFireXOffset = ImageArchive.getArrow().getWidth() / 2;
         sentryFireYOffset = ImageArchive.getArrow().getHeight() / 2;
+        pushXOffset = ImageArchive.getPush().getWidth() / 2;
+        player = PlayerHandler.getPlayer();
     }
 
     @Override
@@ -77,10 +82,12 @@ public class PlayerProjectileManager implements SlickClass {
 
         switch (id) {
             case 0:
-                projectiles.add(new WeakFireball(xPos, yPos, angle, MathTool.getAngleInvX(input, weakFireballXOffset)));
+                projectiles.add(new WeakFireball(xPos, yPos, angle));
                 break;
             case 1:
                 break;
+            case 2:
+                projectiles.add(new Push(xPos, yPos, angle));
         }
     }
 
@@ -91,9 +98,19 @@ public class PlayerProjectileManager implements SlickClass {
 
                 break;
             case 1:
-                projectiles.add(new SentryFire(xPosOrigin - sentryFireXOffset, yPosOrigin - sentryFireYOffset, angle, MathTool.getAngleBetweenTwoPointsInvY(xPosOrigin, yPosOrigin, xPosTarget, yPosTarget, sentryFireXOffset)));
-
+                projectiles.add(new SentryFire(xPosOrigin - sentryFireXOffset, yPosOrigin - sentryFireYOffset, angle, MathTool.getAngleBetweenTwoPointsInvY(xPosOrigin, yPosOrigin, xPosTarget, yPosTarget, sentryFireXOffset), player.isPhysicalManipulationSentry(), player.isManaManipulationSentry()));
+                if(player.isPhysicalManipulationSentry()){
+                    projectiles.add(new SentryFire(xPosOrigin - sentryFireXOffset, yPosOrigin - sentryFireYOffset, angle - 0.25f, MathTool.getAngleBetweenTwoPointsInvY(xPosOrigin, yPosOrigin, xPosTarget, yPosTarget, sentryFireXOffset), player.isPhysicalManipulationSentry(), player.isManaManipulationSentry()));
+                    projectiles.add(new SentryFire(xPosOrigin - sentryFireXOffset, yPosOrigin - sentryFireYOffset, angle + 0.25f, MathTool.getAngleBetweenTwoPointsInvY(xPosOrigin, yPosOrigin, xPosTarget, yPosTarget, sentryFireXOffset), player.isPhysicalManipulationSentry(), player.isManaManipulationSentry()));
+                }
+                break;
+            case 2:
+                break;
         }
+    }
+    
+    public void addProjectile(Projectile p){
+        projectiles.add(p);
     }
 
     public void checkCollision(Projectile p) {

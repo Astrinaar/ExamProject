@@ -32,7 +32,7 @@ public class Zombie extends Enemy {
     private Player player;
     private float attackReload = 0;
     private float slowAmount = 0.25f;
-    private float slowDuration = 750;
+    private float slowDuration = 300;
 
     public Zombie(float xPos, float yPos) {
         super(xPos, yPos);
