@@ -23,6 +23,13 @@ public class ImageArchive {
     private static Image backgroundMainMenu;
     private static Image backgroundBottomBorder;
 
+    //Icons
+    private static Image iconFireball;
+    private static Image iconSentry;
+    private static Image iconPush;
+    private static Image iconCDDark;
+    
+
     //Buttons
     private static Image buttonSinglerPlayer;
 
@@ -57,6 +64,12 @@ public class ImageArchive {
         backgroundMainMenu = new Image("res/MainMenuBG.JPG");
         backgroundBottomBorder = new Image("res/BottomBorder.png");
 
+        //Icons
+        iconFireball = new Image("res/IconFireball.png");
+        iconSentry = new Image("res/IconSentry.png");
+        iconPush = new Image("res/IconPush.png");
+        iconCDDark = new Image("res/IconCDDark.png");
+
         //Buttons
         buttonSinglerPlayer = new Image("res/ButtonSinglePlayer.png");
 
@@ -90,6 +103,24 @@ public class ImageArchive {
         return backgroundBottomBorder;
     }
 
+    //Icons
+    public static Image getIconFireball() {
+        return iconFireball;
+    }
+
+    public static Image getIconSentry() {
+        return iconSentry;
+    }
+
+    public static Image getIconPush() {
+        return iconPush;
+    }
+
+    public static Image getIconCDDark() {
+        return iconCDDark;
+    }
+
+    
     //Buttons
     public static Image getButtonSinglerPlayer() {
         return buttonSinglerPlayer;

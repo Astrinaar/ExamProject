@@ -48,7 +48,7 @@ public class SkillHelper implements SlickClass {
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g){
         effectsIterator = effects.iterator();
         while (effectsIterator.hasNext()) {
             Effect e = effectsIterator.next();
@@ -62,7 +62,7 @@ public class SkillHelper implements SlickClass {
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta){
         effectsIterator = effects.iterator();
         while (effectsIterator.hasNext()) {
             Effect e = effectsIterator.next();

@@ -30,12 +30,12 @@ public class Knockback extends Effect {
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
 
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta)  {
         if (victim.isKnockback()) {
             super.update(container, game, delta);
             victim.setxPos(victim.getxPos() + speed * (float) Math.sin(angle) * delta);

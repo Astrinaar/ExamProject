@@ -43,12 +43,12 @@ public abstract class Effect implements SlickClass {
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g){
         texture.draw(xPos, yPos);
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta){
         lifeTime -= 0.1041667f * delta;
     }
 

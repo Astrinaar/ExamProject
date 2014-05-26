@@ -8,7 +8,7 @@ package states;
 import Player.Player;
 import Player.PlayerHandler;
 import enemyManagement.EnemyManager;
-import extendables.Enemy;
+import extendables.*;
 import helpers.ImageArchive;
 import helpers.SkillHelper;
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ public class CombatState extends BasicGameState {
     private PlayerHandler playerHandler;
     private EnemyManager enemyManager;
     private SkillHelper skillHelper;
+    private static extendables.Error error;
 
     public CombatState(int id, StateHandler stateHandler, SkillHelper skillHelper) {
         this.id = id;
@@ -47,7 +48,7 @@ public class CombatState extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         bottomBorder = ImageArchive.getBackgroundBottomBorder();
-        ArrayList<Enemy> enemies = new ArrayList<>();        
+        ArrayList<Enemy> enemies = new ArrayList<>();
         playerHandler = new PlayerHandler(enemies);
         playerHandler.init(container, game);
         enemyManager = new EnemyManager(enemies);
@@ -61,9 +62,10 @@ public class CombatState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         background.draw(0, 0);
         bottomBorder.draw(0, 550);
-        skillHelper.render(container, game, g);        
+        skillHelper.render(container, game, g);
         enemyManager.render(container, game, g);
         playerHandler.render(container, game, g);
+        renderError(container, game, g);
     }
 
     @Override
@@ -71,19 +73,40 @@ public class CombatState extends BasicGameState {
         playerHandler.update(container, game, delta);
         enemyManager.update(container, game, delta);
         skillHelper.update(container, game, delta);
+        updateError(container, game, delta);
     }
 
-    public void load(Image background, ArrayList<Enemy> enemies){
+    public void updateError(GameContainer container, StateBasedGame game, int delta) {
+        if (error != null) {
+            if (error.getLifeTime() > 0) {
+                error.update(container, game, delta);
+            } else {
+                error = null;
+            }
+        }
+    }
+    
+    public void renderError(GameContainer container, StateBasedGame game, Graphics g){
+        if(error != null){
+            error.render(container, game, g);
+        }
+    }
+
+    public void load(Image background, ArrayList<Enemy> enemies) {
         this.background = background;
         enemyManager.setEnemies(enemies);
     }
-    
+
     public void setBackground(Image background) {
         this.background = background;
     }
-    
-    public void setEnemies(ArrayList<Enemy> enemies){
+
+    public void setEnemies(ArrayList<Enemy> enemies) {
         enemyManager.setEnemies(enemies);
+    }
+
+    public static void setError(extendables.Error error) {
+        CombatState.error = error;
     }
 
 }

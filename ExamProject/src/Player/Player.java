@@ -5,6 +5,7 @@
  */
 package Player;
 
+import errors.NotEnoughMana;
 import extendables.Entity;
 import helpers.ImageArchive;
 import helpers.MathTool;
@@ -17,6 +18,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
+import states.CombatState;
 
 /**
  *
@@ -30,7 +32,10 @@ public class Player extends Entity {
     private final float doubleDirectionMultiplier = 0.707114f;
     private float originalSpeed;
     private final PlayerHandler playerHandler;
+    private float mana;
+    private float maxMana;
     
+    private boolean sorceryFireball = true;
     private boolean physicalManipulationSentry = true;
     private boolean manaManipulationSentry = true;
 
@@ -61,6 +66,7 @@ public class Player extends Entity {
         super.pathing = new Rectangle(xPos + pathingX, yPos + pathingY, 8, 10);
         originalSpeed = speed;
         setMaxLife(500);
+        setMaxMana(100);
     }
 
     @Override
@@ -145,6 +151,7 @@ public class Player extends Entity {
     public void useSkill(int id) {
         switch (id) {
             case 0:
+                //Fireball
                 isCasting = true;
                 castingLockCount = 50;
                 castingTime = 100;
@@ -153,15 +160,19 @@ public class Player extends Entity {
                 castCooldown = 50;
                 break;
             case 1:
+                //Sentry
                 SkillHelper.sentry(input.getMouseX(), input.getMouseY());
                 castCooldown = 50;
                 skill1CD = 600;
                 break;
             case 2:
+                //Push
+                if(useMana(25)){
                 playerHandler.SpawnProjectileFromPlayer(MathTool.getAngle(input, PlayerProjectileManager.pushXOffset), id);
                 castCooldown = 50;
                 skill2CD = 500;
                 break;
+                }
         }
     }
 
@@ -183,6 +194,11 @@ public class Player extends Entity {
     public void updateBounds() {
         bounds.setLocation(xPos + 3, yPos + 3);
     }
+    
+    public void setMaxMana(float mana){
+        this.mana = mana;
+        maxMana = mana;
+    }
 
     public void reset() {
         setxPos(387);
@@ -198,6 +214,16 @@ public class Player extends Entity {
         stunned = false;
         knockback = false;
     }
+    
+    public boolean useMana(float mana){
+        if(mana <= this.mana){
+            this.mana -= mana;
+            return true;
+        } else {
+            CombatState.setError(new NotEnoughMana());
+            return false;
+        }
+    }
 
     public boolean isCasting() {
         return isCasting;
@@ -211,12 +237,35 @@ public class Player extends Entity {
         return castingTimeMax;
     }
 
+    public float getMana() {
+        return mana;
+    }
+
+    public float getMaxMana() {
+        return maxMana;
+    }
+
+    public float getSkill1CD() {
+        return skill1CD;
+    }
+
+    public float getSkill2CD() {
+        return skill2CD;
+    }
+    
+    
+    
+
     public boolean isPhysicalManipulationSentry() {
         return physicalManipulationSentry;
     }
 
     public boolean isManaManipulationSentry() {
         return manaManipulationSentry;
+    }
+
+    public boolean isSorceryFireball() {
+        return sorceryFireball;
     }
     
     

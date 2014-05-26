@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 
-package extendables;
+package errors;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -15,9 +14,19 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author PK
  */
-public interface SlickClass {
+public class NotEnoughMana extends extendables.Error{
+
+    public NotEnoughMana() {
+    message = "Not enough mana";
+    xPos = 325;
+    yPos = 60;
+    }
+
     
-    public void init(GameContainer container, StateBasedGame game) throws SlickException;
-    public void render(GameContainer container, StateBasedGame game, Graphics g);
-    public void update(GameContainer container, StateBasedGame game, int delta);
+    
+
+    @Override
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    }
+    
 }

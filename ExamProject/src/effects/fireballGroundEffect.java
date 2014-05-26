@@ -28,7 +28,7 @@ public class fireballGroundEffect extends Effect{
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta)  {
         super.update(container, game, delta);
         SkillHelper.areaDamageInclusive(xPosMiddle, yPosMiddle, radius, damage * 0.1041667f * delta);
     }
