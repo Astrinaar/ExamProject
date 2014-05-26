@@ -18,6 +18,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import projectiles.WeakFireball;
 
 /**
  *
@@ -36,7 +37,7 @@ public class EnemyProjectileManager implements SlickClass {
     public void SpawnProjectile(float xPos, float yPos, float angle, int id) {
         switch (id) {
             case 0:
-
+                projectiles.add(new WeakFireball(xPos, yPos, angle));
                 break;
         }
     }

@@ -23,10 +23,13 @@ public class IconPush extends Icon{
     texture = ImageArchive.getIconPush();
     hotkey = "3";
     xPos = 414;
+    tooltip = ImageArchive.getTooltipPush();
+    setBounds();
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)  {
+        super.update(container, game, delta);
         cooldown = (int) PlayerHandler.getPlayer().getSkill2CD();
     }
     

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package icons;
 
 import Player.PlayerHandler;
@@ -17,22 +16,21 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author PK
  */
-public class IconSentry extends Icon{
+public class IconSentry extends Icon {
 
     public IconSentry() {
         texture = ImageArchive.getIconSentry();
         hotkey = "2";
         xPos = 372;
+        tooltip = ImageArchive.getTooltipSentry();
+        setBounds();
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
-            cooldown = (int) PlayerHandler.getPlayer().getSkill1CD();
+        super.update(container, game, delta);
+        cooldown = (int) PlayerHandler.getPlayer().getSkill1CD();
 
     }
-    
-    
-    
-    
-    
+
 }

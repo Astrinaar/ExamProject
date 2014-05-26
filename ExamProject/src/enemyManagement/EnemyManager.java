@@ -90,6 +90,8 @@ public class EnemyManager implements SlickClass {
         g.fillRect(250, 20, 300, 25);
         g.setColor(Color.red);
         g.fillRect(251, 21, 300 * (e.getLife() / e.getMaxLife()), 23);
+        g.setColor(Color.white);
+        g.drawString(e.getName(), 350, 23);
         if (e.isCasting()) {
             drawCastBar(e, g);
         }
@@ -127,5 +129,11 @@ public class EnemyManager implements SlickClass {
             this.enemies.add(e);
         }
     }
+
+    public EnemyProjectileManager getProjectileManager() {
+        return projectileManager;
+    }
+    
+    
 
 }

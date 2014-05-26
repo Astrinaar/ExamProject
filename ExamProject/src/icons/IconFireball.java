@@ -23,6 +23,8 @@ public class IconFireball extends Icon{
     texture = ImageArchive.getIconFireball();
     hotkey = "1";
     xPos = 330;
+    tooltip = ImageArchive.getTooltipFireball();
+    setBounds();
     }
 
     

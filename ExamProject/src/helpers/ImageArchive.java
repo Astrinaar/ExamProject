@@ -20,6 +20,7 @@ public class ImageArchive {
 
     //Backgrounds
     private static Image backgroundGrass;
+    private static Image backgroundDirt;
     private static Image backgroundMainMenu;
     private static Image backgroundBottomBorder;
 
@@ -28,7 +29,11 @@ public class ImageArchive {
     private static Image iconSentry;
     private static Image iconPush;
     private static Image iconCDDark;
-    
+
+    //Tooltips
+    private static Image tooltipFireball;
+    private static Image tooltipSentry;
+    private static Image tooltipPush;
 
     //Buttons
     private static Image buttonSinglerPlayer;
@@ -41,6 +46,7 @@ public class ImageArchive {
     //Enemies
     private static Image zombie;
     private static Image bigZombie;
+    private static Image skeletonSummoner;
 
     //Projectiles
     private static Image weakFireball;
@@ -61,6 +67,7 @@ public class ImageArchive {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         //Backgrounds
         backgroundGrass = new Image("res/BackgroundGrass.png");
+        backgroundDirt = new Image("res/BackgroundDirt.png");
         backgroundMainMenu = new Image("res/MainMenuBG.JPG");
         backgroundBottomBorder = new Image("res/BottomBorder.png");
 
@@ -69,6 +76,11 @@ public class ImageArchive {
         iconSentry = new Image("res/IconSentry.png");
         iconPush = new Image("res/IconPush.png");
         iconCDDark = new Image("res/IconCDDark.png");
+
+        //Tooltips
+        tooltipFireball = new Image("res/TooltipFireball.png");
+        tooltipSentry = new Image("res/TooltipSentry.png");
+        tooltipPush = new Image("res/TooltipPush.png");
 
         //Buttons
         buttonSinglerPlayer = new Image("res/ButtonSinglePlayer.png");
@@ -81,6 +93,7 @@ public class ImageArchive {
         //Enemies
         zombie = new Image("res/Zombie.png");
         bigZombie = new Image("res/BigZombie.png");
+        skeletonSummoner = new Image("res/SkeletonSummoner.png");
 
         //Projectiles
         //Effects
@@ -93,6 +106,10 @@ public class ImageArchive {
     //Backgrounds
     public static Image getBackgroundGrass() {
         return backgroundGrass;
+    }
+
+    public static Image getBackgroundDirt() {
+        return backgroundDirt;
     }
 
     public static Image getBackgroundMainMenu() {
@@ -120,7 +137,19 @@ public class ImageArchive {
         return iconCDDark;
     }
 
-    
+    //Tooltips
+    public static Image getTooltipFireball() {
+        return tooltipFireball;
+    }
+
+    public static Image getTooltipSentry() {
+        return tooltipSentry;
+    }
+
+    public static Image getTooltipPush() {
+        return tooltipPush;
+    }
+
     //Buttons
     public static Image getButtonSinglerPlayer() {
         return buttonSinglerPlayer;
@@ -146,6 +175,10 @@ public class ImageArchive {
 
     public static Image getBigZombie() {
         return bigZombie;
+    }
+
+    public static Image getSkeletonSummoner() {
+        return skeletonSummoner;
     }
 
     //Projectiles

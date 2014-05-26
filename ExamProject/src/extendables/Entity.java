@@ -39,6 +39,7 @@ public abstract class Entity implements SlickClass {
     protected float stunDuration = 0;
     protected float hundredPerSec = 0.1041667f;
     protected boolean boss = false;
+    protected boolean knockbackable = true;
 
     public Entity(float xPos, float yPos) {
         this.xPos = xPos;
@@ -144,6 +145,10 @@ public abstract class Entity implements SlickClass {
 
     public float getxPosMiddle() {
         return xPosMiddle;
+    }
+
+    public boolean isKnockbackable() {
+        return knockbackable;
     }
 
     public void setxPos(float xPos) {

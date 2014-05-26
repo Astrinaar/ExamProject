@@ -40,7 +40,7 @@ public class Boss extends Enemy {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
         super.update(container, game, delta);
-        
+
     }
 
     @Override
@@ -62,11 +62,12 @@ public class Boss extends Enemy {
         castingTime = 0;
         castingTimeMax = 0;
     }
-    
-    
-    
 
-    
+    public void setCastTime(float time) {
+        castingTime = time;
+        castingTimeMax = time;
+    }
+
     public void useSkill(int id) {
 
     }
@@ -94,7 +95,5 @@ public class Boss extends Enemy {
     public String getSkillName() {
         return skillName;
     }
-    
-    
 
 }

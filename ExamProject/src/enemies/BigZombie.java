@@ -42,6 +42,7 @@ public class BigZombie extends Boss {
         super.pathingY = 25;
         super.pathing = new Rectangle(xPos + pathingX, yPos + pathingY, 16, 11);
         setMaxLife(2000);
+        name = "Big Zombie";
         moveStrat = MoveRegister.getFollow(this);
     }
 
@@ -109,8 +110,7 @@ public class BigZombie extends Boss {
         switch (id) {
             case 0:
                 isCasting = true;
-                castingTime = 100;
-                castingTimeMax = 100;
+                setCastTime(100);
                 castID = 0;
                 skillName = "Zombie Smash!";
                 break;

@@ -21,7 +21,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import projectiles.Push;
 import projectiles.SentryFire;
-import projectiles.WeakFireball;
+import projectiles.Fireball;
 
 /**
  *
@@ -82,7 +82,7 @@ public class PlayerProjectileManager implements SlickClass {
 
         switch (id) {
             case 0:
-                projectiles.add(new WeakFireball(xPos, yPos, angle));
+                projectiles.add(new Fireball(xPos, yPos, angle));
                 break;
             case 1:
                 break;

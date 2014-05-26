@@ -12,6 +12,7 @@ import static Player.PlayerProjectileManager.sentryFireXOffset;
 import static Player.PlayerProjectileManager.sentryFireYOffset;
 import effects.Knockback;
 import effects.fireballGroundEffect;
+import enemyManagement.EnemyProjectileManager;
 import extendables.Effect;
 import extendables.Enemy;
 import extendables.Entity;
@@ -39,6 +40,7 @@ public class SkillHelper implements SlickClass {
     private static ArrayList<Entity> entities;
     private Iterator<Entity> entitiesIterator;
     private static PlayerProjectileManager playerProjectileManager;
+    private static EnemyProjectileManager enemyProjectilemanager;
     private static Player player;
 
     @Override
@@ -48,7 +50,7 @@ public class SkillHelper implements SlickClass {
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g){
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         effectsIterator = effects.iterator();
         while (effectsIterator.hasNext()) {
             Effect e = effectsIterator.next();
@@ -62,7 +64,7 @@ public class SkillHelper implements SlickClass {
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta){
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         effectsIterator = effects.iterator();
         while (effectsIterator.hasNext()) {
             Effect e = effectsIterator.next();
@@ -88,8 +90,12 @@ public class SkillHelper implements SlickClass {
     public void setPlayerProjectileManager(PlayerProjectileManager playerProjectileManager) {
         this.playerProjectileManager = playerProjectileManager;
     }
-    
-    public void setPlayer(){
+
+    public void setEnemyProjectilemanager(EnemyProjectileManager enemyProjectilemanager) {
+        SkillHelper.enemyProjectilemanager = enemyProjectilemanager;
+    }
+
+    public void setPlayer() {
         player = PlayerHandler.getPlayer();
     }
 
@@ -113,7 +119,6 @@ public class SkillHelper implements SlickClass {
         }
     }
 
-    
     //Player skills
     public static void fireball(Entity target, float radius, float damage) {
         areaDamageExclusive(target.getxPosMiddle(), target.getyPosMiddle(), radius, damage);
@@ -132,14 +137,13 @@ public class SkillHelper implements SlickClass {
         }
         return null;
     }
-    
-    public static void push(Entity target, float angle, float damage, float slowAmount, float slowDuration){
+
+    public static void push(Entity target, float angle, float damage, float slowAmount, float slowDuration) {
         target.receiveDamage(damage);
         target.slow(slowAmount, slowDuration);
         effects.add(new Knockback(target, angle, 15));
     }
 
-    
     //Help
     public static Entity findTarget(Entity e) {
         float minDistance = 9999;
@@ -155,15 +159,19 @@ public class SkillHelper implements SlickClass {
         }
         return closestTarget;
     }
-    
-    
+
     //Boss skills
-    public static void bigZombieSmash(float xPos, float yPos, float damage){
-        if(MathTool.getDistanceToPlayer(xPos, yPos) < 50){
+    public static void bigZombieSmash(float xPos, float yPos, float damage) {
+        if (MathTool.getDistanceToPlayer(xPos, yPos) < 50) {
             player.receiveDamage(damage);
             float angle = MathTool.getAngleToPlayer(xPos, yPos);
             effects.add(new Knockback(player, angle, 15));
         }
+    }
+
+    public static void skeletonFireballShower(float xPos, float yPos) {
+        enemyProjectilemanager.SpawnProjectile(xPos, yPos, MathTool.getAngleToPlayer(xPos, yPos), 0);
+
     }
 
 }

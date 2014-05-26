@@ -37,6 +37,9 @@ public class CombatStateLoader {
             case "Rohan Grass":
                 rohanGrass();
                 break;
+            case "Rohan Dirt":
+                rohanDirt();
+                break;
         }
     }
     
@@ -44,6 +47,12 @@ public class CombatStateLoader {
         enemyArchive.prepareArrayList();
         enemyArchive.addBigZombie();
         combatState.load(ImageArchive.getBackgroundGrass(), enemyArchive.getArrayList());
+    }
+    
+    public void rohanDirt(){
+        enemyArchive.prepareArrayList();
+        enemyArchive.addSkeletonSummoner();
+        combatState.load(ImageArchive.getBackgroundDirt(), enemyArchive.getArrayList());
     }
     
 }

@@ -27,7 +27,7 @@ public class Sentry extends Entity {
 
     public Sentry(float xPos, float yPos) {
         super(xPos, yPos);
-        setLife(100);
+        setLife(1000);
         texture = ImageArchive.getSentry();
         Player player = PlayerHandler.getPlayer();
     }
@@ -48,6 +48,7 @@ public class Sentry extends Entity {
     public void update(GameContainer container, StateBasedGame game, int delta) {
         enforceBorders(container);
         reloadTime -= hundredPerSec * delta;
+        life -= hundredPerSec * delta;
         if (reloadTime <= 0) {
             target = SkillHelper.sentryFire(this);
             reloadTime = 50;

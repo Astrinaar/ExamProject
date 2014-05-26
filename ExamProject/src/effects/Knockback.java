@@ -25,8 +25,14 @@ public class Knockback extends Effect {
     public Knockback(Entity victim, float angle, float duration) {
         this.victim = victim;
         this.angle = angle;
-        lifeTime = duration;
-        victim.setKnockback(true);
+        
+        if (victim.isKnockbackable()) {
+            victim.stun(duration);
+            victim.setKnockback(true);
+            lifeTime = duration;
+        } else {
+            lifeTime= 0;
+        }
     }
 
     @Override
@@ -35,7 +41,7 @@ public class Knockback extends Effect {
     }
 
     @Override
-    public void update(GameContainer container, StateBasedGame game, int delta)  {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         if (victim.isKnockback()) {
             super.update(container, game, delta);
             victim.setxPos(victim.getxPos() + speed * (float) Math.sin(angle) * delta);
