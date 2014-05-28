@@ -14,6 +14,7 @@ import helpers.SkillHelper;
 import icons.IconFireball;
 import icons.IconPush;
 import icons.IconSentry;
+import icons.IconWiki;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -48,6 +49,7 @@ public class PlayerHandler {
         icons.add(new IconFireball());
         icons.add(new IconSentry());
         icons.add(new IconPush());
+        icons.add(new IconWiki());
     }
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {

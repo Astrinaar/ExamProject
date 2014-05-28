@@ -23,17 +23,27 @@ public class ImageArchive {
     private static Image backgroundDirt;
     private static Image backgroundMainMenu;
     private static Image backgroundBottomBorder;
+    private static Image backgroundPausedDarkener;
+
+    //Wiki
+    private static Image wikiWelcomeScreen;
+    private static Image wikiStatusEffects;
+    private static Image wikiMonsters;
 
     //Icons
     private static Image iconFireball;
     private static Image iconSentry;
     private static Image iconPush;
     private static Image iconCDDark;
+    private static Image iconWiki;
 
     //Tooltips
     private static Image tooltipFireball;
     private static Image tooltipSentry;
     private static Image tooltipPush;
+    private static Image tooltipLife;
+    private static Image tooltipMana;
+    private static Image tooltipWiki;
 
     //Buttons
     private static Image buttonSinglerPlayer;
@@ -70,17 +80,27 @@ public class ImageArchive {
         backgroundDirt = new Image("res/BackgroundDirt.png");
         backgroundMainMenu = new Image("res/MainMenuBG.JPG");
         backgroundBottomBorder = new Image("res/BottomBorder.png");
+        backgroundPausedDarkener = new Image("res/PausedDarkener.png");
+
+        //Wiki
+        wikiWelcomeScreen = new Image("res/WikiWelcomeScreen.png");
+        wikiStatusEffects = new Image("res/WikiStatusEffects.png");
+        wikiMonsters = new Image("res/WikiMonsters.png");
 
         //Icons
         iconFireball = new Image("res/IconFireball.png");
         iconSentry = new Image("res/IconSentry.png");
         iconPush = new Image("res/IconPush.png");
         iconCDDark = new Image("res/IconCDDark.png");
+        iconWiki = new Image("res/IconWiki.png");
 
         //Tooltips
         tooltipFireball = new Image("res/TooltipFireball.png");
         tooltipSentry = new Image("res/TooltipSentry.png");
         tooltipPush = new Image("res/TooltipPush.png");
+        tooltipLife = new Image("res/TooltipLife.png");
+        tooltipMana = new Image("res/TooltipMana.png");
+        tooltipWiki = new Image("res/TooltipWiki.png");
 
         //Buttons
         buttonSinglerPlayer = new Image("res/ButtonSinglePlayer.png");
@@ -120,6 +140,23 @@ public class ImageArchive {
         return backgroundBottomBorder;
     }
 
+    public static Image getBackgroundPausedDarkener() {
+        return backgroundPausedDarkener;
+    }
+
+    //Wiki
+    public static Image getWikiWelcomeScreen() {
+        return wikiWelcomeScreen;
+    }
+
+    public static Image getWikiStatusEffects() {
+        return wikiStatusEffects;
+    }
+
+    public static Image getWikiMonsters() {
+        return wikiMonsters;
+    }
+
     //Icons
     public static Image getIconFireball() {
         return iconFireball;
@@ -137,6 +174,10 @@ public class ImageArchive {
         return iconCDDark;
     }
 
+    public static Image getIconWiki() {
+        return iconWiki;
+    }
+
     //Tooltips
     public static Image getTooltipFireball() {
         return tooltipFireball;
@@ -148,6 +189,18 @@ public class ImageArchive {
 
     public static Image getTooltipPush() {
         return tooltipPush;
+    }
+
+    public static Image getTooltipLife() {
+        return tooltipLife;
+    }
+
+    public static Image getTooltipMana() {
+        return tooltipMana;
+    }
+
+    public static Image getTooltipWiki() {
+        return tooltipWiki;
     }
 
     //Buttons

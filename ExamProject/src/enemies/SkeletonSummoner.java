@@ -61,7 +61,6 @@ public class SkeletonSummoner extends Boss {
         if (shootingFireballs && fireballReload <= 0) {
             SkillHelper.skeletonFireballShower(xPosMiddle, yPosMiddle);
             fireballReload = 5;
-            System.out.println("aa");
         }
     }
 
