@@ -6,6 +6,7 @@
 package extendables;
 
 import helpers.SkillHelper;
+import org.newdawn.slick.GameContainer;
 
 /**
  *
@@ -31,6 +32,14 @@ public abstract class Enemy extends Entity {
     public void setCurrentMoveStrat(String currentMoveStrat) {
         this.currentMoveStrat = currentMoveStrat;
     }
+
+    @Override
+    public void stoppedByStun(GameContainer container, int delta) {
+        super.stoppedByStun(container, delta);
+        act(delta);
+    }
+    
+    
     
     
 

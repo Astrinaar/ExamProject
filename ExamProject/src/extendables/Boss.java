@@ -44,14 +44,15 @@ public class Boss extends Enemy {
     }
 
     @Override
-    public void stoppedByStun(GameContainer container, int delta) {
-        super.stoppedByStun(container, delta);
+    public void stoppedByStun(GameContainer container, int delta) {       
         if (isCasting) {
             castingTime -= hundredPerSec * delta;
             if (castingTime <= 0) {
                 cast();
                 isCasting = false;
             }
+        } else {
+            act(delta);
         }
     }
 

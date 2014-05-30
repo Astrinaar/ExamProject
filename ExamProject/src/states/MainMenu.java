@@ -47,7 +47,7 @@ public class MainMenu extends BasicGameState {
             @Override
             public void Click() {
                 stateHandler.enterState(StateHandler.COMBATSTATE);
-                stateHandler.loadCombatState("Rohan Dirt");
+                stateHandler.loadCombatState("Rohan Grass");
             }
         };
     }

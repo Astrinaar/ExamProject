@@ -31,14 +31,13 @@ public class SkeletonSummoner extends Boss {
         super(xPos, yPos);
         super.texture = ImageArchive.getSkeletonSummoner();
         super.bounds = new Rectangle(xPos, yPos, texture.getWidth(), texture.getHeight());
-        super.speed = 0;
+        super.speed = 0.05f;
         super.pathingX = 4;
         super.pathingY = 25;
         super.pathing = new Rectangle(xPos + pathingX, yPos + pathingY, 16, 11);
         setMaxLife(5000);
         name = "Skeleton Summoner";
-        knockbackable = false;
-        moveStrat = MoveRegister.getIdle(this);
+        moveStrat = MoveRegister.getCaster1(this);
     }
 
     @Override
@@ -67,14 +66,14 @@ public class SkeletonSummoner extends Boss {
     @Override
     public void stoppedByStun(GameContainer container, int delta) {
         super.stoppedByStun(container, delta);
-        if (!isCasting) {
-            act(delta);
-        }
     }
 
     @Override
     public void act(int delta) {
 
+        if(fireballShowerDuration <= 0){
+            moveStrat.move(this, delta);
+        }
         if (castingDelay <= 0) {
             int skill;
             do {
@@ -82,6 +81,7 @@ public class SkeletonSummoner extends Boss {
             } while (!canUseSkill(skill));
             useSkill(skill);
         }
+        
 
     }
 
@@ -120,6 +120,7 @@ public class SkeletonSummoner extends Boss {
                 skill0CD = 0;
                 break;
         }
+        moveStrat = MoveRegister.getCaster1(this);
     }
 
     @Override

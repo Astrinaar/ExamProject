@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package wiki;
 
 import extendables.SlickClass;
+import extendables.UI;
 import helpers.ImageArchive;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,33 +22,27 @@ import states.CombatState;
  *
  * @author PK
  */
-public class Wiki implements SlickClass{
-    
-    private CombatState combatState;
-    
+public class Wiki extends UI {
+
+
     private Image wikiWelcomeScreen;
     private Image wikiStatusEffects;
     private Image wikiMonsters;
-    
-    private int currentPage;
-    private Rectangle bounds;
+
     private Rectangle statusEffectsBounds;
     private Rectangle monstersBounds;
-    private Rectangle exitBounds;
 
     public Wiki(CombatState combatState) {
-        this.combatState = combatState;
-        
+        super(combatState);
+        uiID = 0;
     }
 
-    
-    
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        super.init(container, game);
         wikiWelcomeScreen = ImageArchive.getWikiWelcomeScreen();
         wikiStatusEffects = ImageArchive.getWikiStatusEffects();
         wikiMonsters = ImageArchive.getWikiMonsters();
-        currentPage = 0;
         bounds = new Rectangle(50, 50, wikiWelcomeScreen.getWidth(), wikiWelcomeScreen.getHeight());
         statusEffectsBounds = new Rectangle(85, 168, 105, 15);
         monstersBounds = new Rectangle(85, 201, 70, 15);
@@ -56,25 +50,8 @@ public class Wiki implements SlickClass{
     }
 
     @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) {
-        renderCurrentPage(currentPage);
-    }
-
-    @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) {
-        Input input = container.getInput();
-        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
-            Point p = new Point(input.getMouseX(), input.getMouseY());
-            if(bounds.contains(p)){
-                clicked(currentPage, p);
-            } else {
-               combatState.closeWiki();
-            }
-        }
-    }
-    
-    private void renderCurrentPage(int currentPage){
-        switch(currentPage){
+    public void renderCurrentPage(int currentPage) {
+        switch (currentPage) {
             case 0:
                 wikiWelcomeScreen.draw(50, 50);
                 break;
@@ -86,16 +63,17 @@ public class Wiki implements SlickClass{
                 break;
         }
     }
-    
-    public void clicked(int currentPage, Point p){
-        if(statusEffectsBounds.contains(p)){
+
+    @Override
+    public void clicked(int currentPage, Point p) {
+        if (statusEffectsBounds.contains(p)) {
             this.currentPage = 1;
         } else {
-            if(monstersBounds.contains(p)){
+            if (monstersBounds.contains(p)) {
                 this.currentPage = 2;
             } else {
-                if(exitBounds.contains(p)){
-                    combatState.closeWiki();
+                if (exitBounds.contains(p)) {
+                    combatState.closeUI(0);
                 }
             }
         }

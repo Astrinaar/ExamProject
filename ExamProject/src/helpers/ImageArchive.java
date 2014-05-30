@@ -25,6 +25,19 @@ public class ImageArchive {
     private static Image backgroundBottomBorder;
     private static Image backgroundPausedDarkener;
 
+    //UI
+    private static Image talentTree;
+
+    //Tutorials
+    private static Image tutorialFirstCombat1;
+    private static Image tutorialFirstCombat2;
+    private static Image tutorialFirstCombat3;
+    private static Image tutorialFirstCombat4;
+    private static Image tutorialLvl2;
+    private static Image tutorialLvl5;
+    private static Image tutorialLvl10;
+    private static Image tutorialLvl15;
+
     //Wiki
     private static Image wikiWelcomeScreen;
     private static Image wikiStatusEffects;
@@ -81,6 +94,19 @@ public class ImageArchive {
         backgroundMainMenu = new Image("res/MainMenuBG.JPG");
         backgroundBottomBorder = new Image("res/BottomBorder.png");
         backgroundPausedDarkener = new Image("res/PausedDarkener.png");
+
+        //UI
+        talentTree = new Image("res/TalentTree.png");
+
+        //Tutorials
+        tutorialFirstCombat1 = new Image("res/TutorialFirstCombat1.png");
+        tutorialFirstCombat2 = new Image("res/TutorialFirstCombat2.png");
+        tutorialFirstCombat3 = new Image("res/TutorialFirstCombat3.png");
+        tutorialFirstCombat4 = new Image("res/TutorialFirstCombat4.png");
+        tutorialLvl2 = new Image("res/TutorialLvl2.png");
+        tutorialLvl5 = new Image("res/TutorialLvl5.png");
+        tutorialLvl10 = new Image("res/TutorialLvl10.png");
+        tutorialLvl15 = new Image("res/TutorialLvl15.png");
 
         //Wiki
         wikiWelcomeScreen = new Image("res/WikiWelcomeScreen.png");
@@ -143,6 +169,46 @@ public class ImageArchive {
     public static Image getBackgroundPausedDarkener() {
         return backgroundPausedDarkener;
     }
+
+    //UI
+    public static Image getTalentTree() {
+        return talentTree;
+    }
+
+    //Tutorial
+    public static Image getTutorialFirstCombat1() {
+        return tutorialFirstCombat1;
+    }
+
+    public static Image getTutorialFirstCombat2() {
+        return tutorialFirstCombat2;
+    }
+
+    public static Image getTutorialFirstCombat3() {
+        return tutorialFirstCombat3;
+    }
+
+    public static Image getTutorialFirstCombat4() {
+        return tutorialFirstCombat4;
+    }
+
+    public static Image getTutorialLvl2() {
+        return tutorialLvl2;
+    }
+
+    public static Image getTutorialLvl5() {
+        return tutorialLvl5;
+    }
+
+    public static Image getTutorialLvl10() {
+        return tutorialLvl10;
+    }
+
+    public static Image getTutorialLvl15() {
+        return tutorialLvl15;
+    }
+    
+    
 
     //Wiki
     public static Image getWikiWelcomeScreen() {

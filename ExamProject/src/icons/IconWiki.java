@@ -34,12 +34,5 @@ public class IconWiki extends Icon {
         }
     }
 
-    @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) {
-        texture.draw(xPos, yPos);
-        if (showTooltip) {
-            tooltip.draw(xPos - tooltip.getWidth(), yPos - tooltip.getHeight());
-        }
-    }
 
 }

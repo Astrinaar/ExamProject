@@ -40,11 +40,17 @@ public class CombatState extends BasicGameState {
     private static extendables.Error error;
     private Wiki wiki;
     private boolean showWiki = false;
+    private boolean showLifeTooltip = false;
+    private boolean showManaTooltip = false;
     private boolean paused = false;
+    private boolean showTutorialFirstCombat = false;
     private Image pausedDarkener;
-    
+
     private Rectangle wikiBounds;
-    
+    private Rectangle lifeBounds;
+    private Rectangle manaBounds;
+    private Image lifeTooltip;
+    private Image manaTooltip;
 
     public CombatState(int id, StateHandler stateHandler, SkillHelper skillHelper) {
         this.id = id;
@@ -73,6 +79,10 @@ public class CombatState extends BasicGameState {
         wiki = new Wiki(this);
         wiki.init(container, game);
         wikiBounds = new Rectangle(762, 554, 28, 42);
+        lifeBounds = new Rectangle(120, 555, 150, 16);
+        manaBounds = new Rectangle(120, 580, 150, 16);
+        lifeTooltip = ImageArchive.getTooltipLife();
+        manaTooltip = ImageArchive.getTooltipMana();
     }
 
     @Override
@@ -83,7 +93,8 @@ public class CombatState extends BasicGameState {
         enemyManager.render(container, game, g);
         playerHandler.render(container, game, g);
         renderError(container, game, g);
-        if(paused){
+        renderTooltips(g);
+        if (paused) {
             pausedDarkener.draw(0, 0);
             g.setColor(Color.white);
             g.drawString("Paused", 375, 250);
@@ -93,22 +104,22 @@ public class CombatState extends BasicGameState {
             g.setColor(Color.white);
             g.drawString("to unpause", 410, 300);
         }
-        if(showWiki){
+        if (showWiki) {
             wiki.render(container, game, g);
         }
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-        if(!paused){
-        playerHandler.update(container, game, delta);
-        enemyManager.update(container, game, delta);
-        skillHelper.update(container, game, delta);
-        updateError(container, game, delta);
+        if (!paused) {
+            playerHandler.update(container, game, delta);
+            enemyManager.update(container, game, delta);
+            skillHelper.update(container, game, delta);
+            updateError(container, game, delta);
         }
-        if(showWiki){
+        if (showWiki) {
             wiki.update(container, game, delta);
-        } else{
+        } else {
             reactToInput(container);
         }
     }
@@ -129,29 +140,51 @@ public class CombatState extends BasicGameState {
         }
     }
 
+    public void renderTooltips(Graphics g) {
+        if (showLifeTooltip) {
+            lifeTooltip.draw(120, 555 - lifeTooltip.getHeight());
+        } else {
+            if (showManaTooltip) {
+                manaTooltip.draw(120, 580 - manaTooltip.getHeight());
+            }
+        }
+    }
+
     public void load(Image background, ArrayList<Enemy> enemies) {
         this.background = background;
         enemyManager.setEnemies(enemies);
     }
-    
-    public void reactToInput(GameContainer container){
-        Input input = container.getInput();        
-        if(input.isKeyPressed(Input.KEY_ESCAPE) || input.isKeyPressed(Input.KEY_P)){
-            if(!paused){
+
+    public void reactToInput(GameContainer container) {
+        Input input = container.getInput();
+        Point p = new Point(input.getMouseX(), input.getMouseY());
+        if (input.isKeyPressed(Input.KEY_ESCAPE) || input.isKeyPressed(Input.KEY_P)) {
+            if (!paused) {
                 paused = true;
-            } else{
+            } else {
                 paused = false;
             }
-        } 
-        
-        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
-            Point p = new Point(input.getMouseX(), input.getMouseY());
-            if(wikiBounds.contains(p)){
+        }
+
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+            if (wikiBounds.contains(p)) {
                 showWiki = true;
                 paused = true;
             }
         }
-        
+
+        if (lifeBounds.contains(p)) {
+            showLifeTooltip = true;
+        } else {
+            showLifeTooltip = false;
+            if (manaBounds.contains(p)) {
+                showManaTooltip = true;
+            } else {
+                showManaTooltip = false;
+            }
+        }
+
     }
 
     public void setBackground(Image background) {
@@ -166,13 +199,16 @@ public class CombatState extends BasicGameState {
         CombatState.error = error;
     }
 
-    public void closeWiki() {
-        showWiki = false;
-        
+    public void closeUI(int id) {
+        switch (id) {
+            case 0:
+                showWiki = false;
+                break;
+            case 1:
+                showTutorialFirstCombat = false;
+                break;
+        }
+
     }
-    
-    
-    
-    
 
 }
