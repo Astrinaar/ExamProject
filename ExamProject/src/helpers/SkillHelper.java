@@ -99,6 +99,11 @@ public class SkillHelper implements SlickClass {
         player = PlayerHandler.getPlayer();
     }
 
+    public void reset() {
+        effects = new ArrayList<>();
+        entities = new ArrayList<>();
+    }
+
     public static void areaDamageExclusive(float xPos, float yPos, float radius, float damage) {
         enemyiterator = enemies.iterator();
         while (enemyiterator.hasNext()) {

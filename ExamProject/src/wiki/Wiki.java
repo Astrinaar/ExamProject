@@ -40,10 +40,12 @@ public class Wiki extends UI {
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         super.init(container, game);
+        xPos = 50;
+        yPos = 50;
         wikiWelcomeScreen = ImageArchive.getWikiWelcomeScreen();
         wikiStatusEffects = ImageArchive.getWikiStatusEffects();
         wikiMonsters = ImageArchive.getWikiMonsters();
-        bounds = new Rectangle(50, 50, wikiWelcomeScreen.getWidth(), wikiWelcomeScreen.getHeight());
+        bounds = new Rectangle(xPos, yPos, wikiWelcomeScreen.getWidth(), wikiWelcomeScreen.getHeight());
         statusEffectsBounds = new Rectangle(85, 168, 105, 15);
         monstersBounds = new Rectangle(85, 201, 70, 15);
         exitBounds = new Rectangle(702, 61, 33, 33);
@@ -53,13 +55,13 @@ public class Wiki extends UI {
     public void renderCurrentPage(int currentPage) {
         switch (currentPage) {
             case 0:
-                wikiWelcomeScreen.draw(50, 50);
+                wikiWelcomeScreen.draw(xPos, yPos);
                 break;
             case 1:
-                wikiStatusEffects.draw(50, 50);
+                wikiStatusEffects.draw(xPos, yPos);
                 break;
             case 2:
-                wikiMonsters.draw(50, 50);
+                wikiMonsters.draw(xPos, yPos);
                 break;
         }
     }
@@ -74,6 +76,7 @@ public class Wiki extends UI {
             } else {
                 if (exitBounds.contains(p)) {
                     combatState.closeUI(0);
+                    currentPage = 0;
                 }
             }
         }

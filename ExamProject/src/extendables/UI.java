@@ -24,6 +24,9 @@ public abstract class UI implements SlickClass {
 
     protected CombatState combatState;
     protected int uiID;
+    
+    protected float xPos;
+    protected float yPos;
 
     protected int currentPage;
     protected Rectangle bounds;
@@ -53,6 +56,7 @@ public abstract class UI implements SlickClass {
                 clicked(currentPage, p);
             } else {
                 combatState.closeUI(uiID);
+                currentPage = 0;
             }
         }
     }
@@ -64,6 +68,7 @@ public abstract class UI implements SlickClass {
     public void clicked(int currentPage, Point p) {
         if (exitBounds.contains(p)) {
             combatState.closeUI(uiID);
+            currentPage = 0;
         }
     }
 }

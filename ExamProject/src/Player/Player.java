@@ -34,10 +34,10 @@ public class Player extends Entity {
     private final PlayerHandler playerHandler;
     private float mana;
     private float maxMana;
-    
+
     private boolean sorceryFireball = true;
-    private boolean physicalManipulationSentry = true;
-    private boolean manaManipulationSentry = true;
+    private boolean physicalManipulationSentry = false;
+    private boolean manaManipulationSentry = false;
 
     private boolean isCasting = false;
     private float castingLockCount = 0;
@@ -167,11 +167,11 @@ public class Player extends Entity {
                 break;
             case 2:
                 //Push
-                if(useMana(25)){
-                playerHandler.SpawnProjectileFromPlayer(MathTool.getAngle(input, PlayerProjectileManager.pushXOffset), id);
-                castCooldown = 50;
-                skill2CD = 500;
-                break;
+                if (useMana(50)) {
+                    playerHandler.SpawnProjectileFromPlayer(MathTool.getAngle(input, PlayerProjectileManager.pushXOffset), id);
+                    castCooldown = 50;
+                    skill2CD = 500;
+                    break;
                 }
         }
     }
@@ -187,15 +187,13 @@ public class Player extends Entity {
         castingTime = 0;
         castingTimeMax = 0;
     }
-    
-    
 
     @Override
     public void updateBounds() {
         bounds.setLocation(xPos + 3, yPos + 3);
     }
-    
-    public void setMaxMana(float mana){
+
+    public void setMaxMana(float mana) {
         this.mana = mana;
         maxMana = mana;
     }
@@ -204,6 +202,7 @@ public class Player extends Entity {
         setxPos(387);
         setyPos(500);
         setLife(500);
+        setMaxMana(100);
         reloadTime = 400;
         slowAmount = 0;
         slowed = false;
@@ -213,10 +212,12 @@ public class Player extends Entity {
         castingTime = 0;
         stunned = false;
         knockback = false;
+        skill1CD = 0;
+        skill2CD = 0;
     }
-    
-    public boolean useMana(float mana){
-        if(mana <= this.mana){
+
+    public boolean useMana(float mana) {
+        if (mana <= this.mana) {
             this.mana -= mana;
             return true;
         } else {
@@ -252,9 +253,6 @@ public class Player extends Entity {
     public float getSkill2CD() {
         return skill2CD;
     }
-    
-    
-    
 
     public boolean isPhysicalManipulationSentry() {
         return physicalManipulationSentry;
@@ -267,7 +265,5 @@ public class Player extends Entity {
     public boolean isSorceryFireball() {
         return sorceryFireball;
     }
-    
-    
 
 }

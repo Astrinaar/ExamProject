@@ -32,9 +32,6 @@ public class IconPush extends Icon{
         super.update(container, game, delta);
         cooldown = (int) PlayerHandler.getPlayer().getSkill2CD();
     }
-    
-    
-    
-    
+
     
 }

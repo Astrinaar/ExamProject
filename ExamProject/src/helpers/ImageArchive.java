@@ -60,6 +60,12 @@ public class ImageArchive {
 
     //Buttons
     private static Image buttonSinglerPlayer;
+    private static Image buttonFirstCombat;
+    private static Image buttonBossFight;
+    private static Image buttonReachedLvl2;
+    private static Image buttonReachedLvl5;
+    private static Image buttonReachedLvl10;
+    private static Image buttonReachedLvl15;
 
     //Player related
     private static Image player;
@@ -130,6 +136,12 @@ public class ImageArchive {
 
         //Buttons
         buttonSinglerPlayer = new Image("res/ButtonSinglePlayer.png");
+        buttonFirstCombat = new Image("res/ButtonFirstCombat.png");
+        buttonBossFight = new Image("res/ButtonBossFight.png");
+        buttonReachedLvl2 = new Image("res/ButtonReachedLvl2.png");
+        buttonReachedLvl5 = new Image("res/ButtonReachedLvl5.png");
+        buttonReachedLvl10 = new Image("res/ButtonReachedLvl10.png");
+        buttonReachedLvl15 = new Image("res/ButtonReachedLvl15.png");
 
         //Player related
         player = new Image("res/Player.png");
@@ -149,7 +161,7 @@ public class ImageArchive {
         sentry = new Image("res/Sentry1.png");
     }
 
-    //Backgrounds
+//Backgrounds
     public static Image getBackgroundGrass() {
         return backgroundGrass;
     }
@@ -207,8 +219,6 @@ public class ImageArchive {
     public static Image getTutorialLvl15() {
         return tutorialLvl15;
     }
-    
-    
 
     //Wiki
     public static Image getWikiWelcomeScreen() {
@@ -274,6 +284,30 @@ public class ImageArchive {
         return buttonSinglerPlayer;
     }
 
+    public static Image getButtonFirstCombat() {
+        return buttonFirstCombat;
+    }
+
+    public static Image getButtonBossFight() {
+        return buttonBossFight;
+    }
+
+    public static Image getButtonReachedLvl2() {
+        return buttonReachedLvl2;
+    }
+
+    public static Image getButtonReachedLvl5() {
+        return buttonReachedLvl5;
+    }
+
+    public static Image getButtonReachedLvl10() {
+        return buttonReachedLvl10;
+    }
+
+    public static Image getButtonReachedLvl15() {
+        return buttonReachedLvl15;
+    }
+
     //Player related
     public static Image getPlayer() {
         return player;
@@ -304,8 +338,10 @@ public class ImageArchive {
     public static Image getWeakFireball() {
         try {
             return new Image("res/WeakFireball.png");
+
         } catch (SlickException ex) {
-            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImageArchive.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -313,8 +349,10 @@ public class ImageArchive {
     public static Image getArrow() {
         try {
             return new Image("res/Arrow1.png");
+
         } catch (SlickException ex) {
-            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImageArchive.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -322,8 +360,10 @@ public class ImageArchive {
     public static Image getArrowFire() {
         try {
             return new Image("res/ArrowFire.png");
+
         } catch (SlickException ex) {
-            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImageArchive.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -331,8 +371,10 @@ public class ImageArchive {
     public static Image getPush() {
         try {
             return new Image("res/Push.png");
+
         } catch (SlickException ex) {
-            Logger.getLogger(ImageArchive.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImageArchive.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

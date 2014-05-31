@@ -18,7 +18,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class StateHandler {
 
-    private final ExamProject examProject;
+    private static ExamProject examProject;
     public static final int MAINMENUSTATE = 0;
     private CombatStateLoader combatStateLoader;
     public static final int COMBATSTATE = 1;
@@ -31,7 +31,7 @@ public class StateHandler {
 
     }
 
-    public void enterState(int id) {
+    public static void enterState(int id) {
         examProject.enterState(id);
     }
 

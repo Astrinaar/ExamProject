@@ -35,7 +35,7 @@ public class SkeletonSummoner extends Boss {
         super.pathingX = 4;
         super.pathingY = 25;
         super.pathing = new Rectangle(xPos + pathingX, yPos + pathingY, 16, 11);
-        setMaxLife(5000);
+        setMaxLife(7500);
         name = "Skeleton Summoner";
         moveStrat = MoveRegister.getCaster1(this);
     }

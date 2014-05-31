@@ -28,7 +28,4 @@ public class IconFireball extends Icon{
     }
 
     
-    
-    
-    
 }

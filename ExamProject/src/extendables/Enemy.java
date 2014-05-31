@@ -39,9 +39,5 @@ public abstract class Enemy extends Entity {
         act(delta);
     }
     
-    
-    
-    
-
 
 }

@@ -28,6 +28,7 @@ public class EnemyManager implements SlickClass {
     private Iterator<Enemy> enemyiterator;
     private ComparatorY comparatorY;
     private EnemyProjectileManager projectileManager;
+    private boolean dead = false;
 
     public EnemyManager(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
@@ -59,22 +60,27 @@ public class EnemyManager implements SlickClass {
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) {
-        enemyiterator = enemies.iterator();
-        while (enemyiterator.hasNext()) {
-            Enemy e = enemyiterator.next();
-            e.update(container, game, delta);
-            if (e.getLife() <= 0) {
-                enemyiterator.remove();
+        if (enemies.isEmpty()) {
+            dead = true;
+        } else {
+
+            enemyiterator = enemies.iterator();
+            while (enemyiterator.hasNext()) {
+                Enemy e = enemyiterator.next();
+                e.update(container, game, delta);
+                if (e.getLife() <= 0) {
+                    enemyiterator.remove();
+                }
             }
-        }
-        enemyiterator = enemies.iterator();
-        while (enemyiterator.hasNext()) {
-            Enemy e = enemyiterator.next();
-            for (Enemy i : enemies) {
-                e.pathing(i.getPathing(), delta);
+            enemyiterator = enemies.iterator();
+            while (enemyiterator.hasNext()) {
+                Enemy e = enemyiterator.next();
+                for (Enemy i : enemies) {
+                    e.pathing(i.getPathing(), delta);
+                }
             }
+            projectileManager.update(container, game, delta);
         }
-        projectileManager.update(container, game, delta);
     }
 
     public void drawHealthBars(Enemy e, Graphics g) {
@@ -117,6 +123,7 @@ public class EnemyManager implements SlickClass {
             enemyiterator.remove();
         }
         projectileManager.reset();
+        dead = false;
     }
 
     public void setEnemies(ArrayList<Enemy> enemies) {
@@ -128,12 +135,15 @@ public class EnemyManager implements SlickClass {
         for (Enemy e : enemies) {
             this.enemies.add(e);
         }
+        dead = false;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     public EnemyProjectileManager getProjectileManager() {
         return projectileManager;
     }
-    
-    
 
 }

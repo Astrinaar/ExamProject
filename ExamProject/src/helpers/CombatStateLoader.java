@@ -40,6 +40,7 @@ public class CombatStateLoader {
             case "Rohan Dirt":
                 rohanDirt();
                 break;
+                
         }
     }
     

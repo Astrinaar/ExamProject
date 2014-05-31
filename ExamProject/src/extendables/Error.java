@@ -51,9 +51,5 @@ public abstract class Error implements SlickClass{
         return lifeTime;
     }
     
-    
-    
-    
-    
-    
+
 }

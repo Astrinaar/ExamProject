@@ -62,9 +62,7 @@ public class BigZombie extends Boss {
     @Override
     public void stoppedByStun(GameContainer container, int delta) {
         super.stoppedByStun(container, delta);
-        if (!isCasting) {
-            act(delta);
-        }
+       
     }
     
     
