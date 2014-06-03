@@ -62,4 +62,9 @@ public abstract class Icon implements SlickClass {
         bounds = new Rectangle(xPos, yPos, texture.getWidth(), texture.getHeight());
     }
 
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    
 }

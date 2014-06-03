@@ -61,8 +61,9 @@ public class TutorialFirstCombat extends UI {
                         this.currentPage = 3;
                     } else{
                         if(currentPage == 3){
+                            this.currentPage = 0;
                             combatState.closeUI(1);
-                            currentPage = 0;
+                            
                         }
                     }
                 }

@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/wiki/Wiki.java</file>
+            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/Player/PlayerHandler.java</file>
+            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/extendables/MoveStrategy.java</file>
             <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/ui/TutorialFirstCombat.java</file>
-            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/states/MainMenu.java</file>
-            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/extendables/UI.java</file>
             <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/states/CombatState.java</file>
-            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/helpers/ImageArchive.java</file>
+            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/extendables/Icon.java</file>
+            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/Player/Player.java</file>
+            <file>file:/C:/Users/PK/Documents/GitHub/ExamProject/ExamProject/src/projectiles/WeakFireball.java</file>
         </group>
     </open-files>
 </project-private>

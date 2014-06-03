@@ -168,5 +168,8 @@ public class PlayerHandler {
         dead = false;
         player.reset();
         projectileManager.reset();
+        for(Icon i : icons){
+            i.setCooldown(0);
+        }
     }
 }

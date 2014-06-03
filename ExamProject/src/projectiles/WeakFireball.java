@@ -26,7 +26,7 @@ public class WeakFireball extends Projectile{
         super.damage = 20;
         super.texture.setCenterOfRotation(7, 7);
         super.speed = 0.3f;
-        super.texture.setRotation((float) Math.toDegrees(angle * -1 + 3.1416));
+        super.texture.setRotation((float) Math.toDegrees(this.angle * -1 + 3.1416));
     }
     
 }
