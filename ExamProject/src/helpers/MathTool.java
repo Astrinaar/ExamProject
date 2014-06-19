@@ -28,9 +28,9 @@ public class MathTool {
         return angle;
     }
 
-    public static float getAngleBetweenTwoPoints(float xOrigin, float yOrigin, float xTarget, float yTarget, float projectileXOffset) {
-        float deltax = xTarget - projectileXOffset - xOrigin;
-        float deltay = yTarget - projectileXOffset - yOrigin;
+    public static float getAngleBetweenTwoPoints(float xOrigin, float yOrigin, float xTarget, float yTarget, float XOffset) {
+        float deltax = xTarget - XOffset - xOrigin;
+        float deltay = yTarget - XOffset - yOrigin;
         float angle = (float) Math.atan2(deltax, deltay);
         return angle;
     }
